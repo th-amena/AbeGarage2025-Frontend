@@ -3,7 +3,7 @@ import Layout from '../Layout/Layout'
 
 function Home() {
   return (
-    <Layout>Home</Layout>
+    <Layout>Home Page Layout Test</Layout>
   )
 }
 
