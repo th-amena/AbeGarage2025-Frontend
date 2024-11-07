@@ -4,6 +4,7 @@ import Layout from '../Layout/Layout'
 function Home() {
   return (
     <Layout>Home</Layout>
+
   )
 }
 
