@@ -10,8 +10,6 @@ import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
 function App() {
- 
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -21,4 +19,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
