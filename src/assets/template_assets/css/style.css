@@ -438,7 +438,10 @@ img {
   border-radius: 0;
   overflow: hidden;
   text-transform: uppercase;
+<<<<<<< HEAD
   background-color: red;
+=======
+>>>>>>> main
 }
 
 .btn-style-one:hover {
@@ -2269,7 +2272,11 @@ img {
   max-width: 570px;
   margin: 0 auto;
   margin-right: 0;
+<<<<<<< HEAD
   padding: 70px 0;
+=======
+  /* padding: 70px 0; */
+>>>>>>> main
 }
 
 .features-section h2 {
@@ -2287,7 +2294,12 @@ img {
 
 .features-section .image {
   position: relative;
+<<<<<<< HEAD
   margin-top: -100px;
+=======
+  /* margin-top: -100px; */
+  margin: auto 0;
+>>>>>>> main
 }
 
 /* Why Choose Us */
@@ -6030,14 +6042,24 @@ img {
 
 .contact-section .contact-title {
   position: relative;
+<<<<<<< HEAD
   margin-bottom: 15px;
+=======
+  margin-bottom: 50px;
+>>>>>>> main
 }
 
 .contact-section .contact-title h2 {
   position: relative;
+<<<<<<< HEAD
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 10px;
+=======
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+>>>>>>> main
   line-height: 1.4em;
   display: inline-block;
 }
@@ -6049,7 +6071,10 @@ img {
   bottom: 15px;
   width: 50px;
   height: 2px;
+<<<<<<< HEAD
   background-color: red;
+=======
+>>>>>>> main
 }
 
 .contact-section .contact-title .text {
@@ -6075,7 +6100,11 @@ img {
 
 .contact-form .form-group {
   position: relative;
+<<<<<<< HEAD
   margin-bottom: 15px;
+=======
+  margin-bottom: 30px;
+>>>>>>> main
 }
 
 .contact-form input[type="text"],
@@ -6084,11 +6113,19 @@ img {
 .contact-form select,
 .contact-form textarea {
   display: block;
+<<<<<<< HEAD
   width: 50%;
   line-height: 28px;
   height: 35px;
   font-size: 16px;
   padding: 5px 22px;
+=======
+  width: 100%;
+  line-height: 28px;
+  height: 56px;
+  font-size: 16px;
+  padding: 10px 22px;
+>>>>>>> main
   background: #ffffff;
   color: #000000;
   border: 1px solid #dddddd;
@@ -6108,7 +6145,11 @@ img {
 .contact-form .theme-btn {
   font-size: 18px;
   margin-top: 10px;
+<<<<<<< HEAD
   padding: 10px 36px;
+=======
+  padding: 20px 36px;
+>>>>>>> main
   position: relative;
   color: #fff;
 }
