@@ -1,4 +1,4 @@
-# Sprint Two Tasks for AbeGarage
+# Frontend Sprint Two Tasks for AbeGarage
 
 ## Task ID: EAGP-FE-008
 **Task Title:** Implement Client-Side Authorization Using Protected Routes in React  
