@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../../assets/template_assets/css/style.css";
 // import employee.service.js
-// import employeeService from "../../../../services/employee.service";
+import employeeService from "../../../../Services/employee.service";
 // // Import the useAuth hook
 // import { useAuth } from "../../../../Contexts/AuthContext";
 
@@ -77,13 +77,13 @@ function AddEmployeeForm(props) {
     };
     // Pass the form data to the service
     const newEmployee = employeeService.createEmployee(
-      formData,
-      loggedInEmployeeToken
+      formData
+      // ,loggedInEmployeeToken
     );
     newEmployee
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         // If Error is returned from the API server, set the error message
         if (data.error) {
           setServerError(data.error);
