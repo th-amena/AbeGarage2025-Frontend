@@ -8,8 +8,12 @@
 }
 
 /* Placeholder style */
+<<<<<<< HEAD
+input::placeholder, textarea::placeholder {
+=======
 input::placeholder,
 textarea::placeholder {
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
   font-weight: 400;
   opacity: 0.3;
   color: #000;
@@ -18,14 +22,21 @@ textarea::placeholder {
 
 /* Header */
 .main-header {
+<<<<<<< HEAD
   box-shadow: rgba(9, 30, 66, 0.25) 0px 2px 5px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+/* Admin pages */
+.admin-left-side {
+  background-color:#222b48;
+=======
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 2px 5px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 /* Admin pages */
 .admin-left-side {
   background-color: #222b48;
-  height: 790px;
-  margin: 0 -10px;
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
 }
 
 .admin-right-side {
@@ -75,8 +86,11 @@ textarea::placeholder {
 .admin-left-side a:hover {
   color: #fff;
 }
-
+<<<<<<< HEAD
+.validation-error{
+=======
 .validation-error {
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
   color: red;
   float: right;
   font-style: italic;
@@ -143,7 +157,11 @@ input:disabled {
 }
 
 /* Table style */
+<<<<<<< HEAD
+.table a  {
+=======
 .table a {
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
   color: #0a1436;
   font-weight: 600;
 }
@@ -173,7 +191,11 @@ input:disabled {
   color: red;
   font-size: 1.5em;
   margin-bottom: -3px;
+<<<<<<< HEAD
+  text-align: end;  
+=======
   text-align: end;
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
   cursor: pointer;
 }
 
@@ -210,8 +232,11 @@ input:disabled {
   position: relative;
   z-index: 1;
 }
-
+<<<<<<< HEAD
+.service-item .edit-delete span{
+=======
 .service-item .edit-delete span {
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
   padding: 15px;
 }
 
@@ -285,8 +310,11 @@ input:disabled {
 .service-block-one .text span {
   color: #000821;
 }
-
+<<<<<<< HEAD
+.contact-form input[type="number"]{
+=======
 .contact-form input[type="number"] {
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
   display: block;
   width: 100%;
   line-height: 28px;
@@ -318,4 +346,8 @@ input:disabled {
 
 .change-status {
   cursor: pointer;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
