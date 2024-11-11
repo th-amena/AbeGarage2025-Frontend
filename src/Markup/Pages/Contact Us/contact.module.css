@@ -3,13 +3,14 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding: 50px 0;
+  background-position: center;
+  padding-left: 320px;
 }
+
 .contactus h1 {
-  color: white;
-  padding-left: 60px;
-}
-.home {
-  padding-left: 60px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: rgb(233, 232, 232);
 }
 
 .contactus a:hover {
@@ -21,9 +22,9 @@
 }
 .location {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   margin: 120px;
-  gap: 40px;
+  gap: 100px;
 }
 .map iframe {
   width: 420px;
@@ -43,9 +44,9 @@
   flex: 1;
 }
 .appointmentcontainer {
-  align-items: center; 
-  height: 35vh; 
-  padding: 40px; 
+  align-items: center;
+  height: 35vh;
+  padding: 40px;
   background-color: #f0f0f0;
 }
 
@@ -91,9 +92,9 @@
   margin-left: 10px; /* Space between text and arrow */
 }
 
-.number{
-    margin-left: 10px;
-    margin-right: 10px;
+.number {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 /* Media Queries for Responsiveness */
 
