@@ -8,6 +8,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
 function Contact() {
+  const apiKey = import.meta.env.VITE_MAPS_API_KEY; // Access the API key from env
+  const mapSrc = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=54B,+Tailstoi+Town,+5238+MT,+La+city,+IA+5224`;
   return (
     <Layout>
       <div className={classes.contact}>
@@ -19,7 +21,7 @@ function Contact() {
           {"  "}
           <span>&gt;</span>
           {"  "}
-          <Link style={{ color: "white"}} to="/about">
+          <Link style={{ color: "white" }} to="/about">
             About Us
           </Link>
         </div>
@@ -27,7 +29,8 @@ function Contact() {
           {/* Google Map */}
           <div className={classes.map}>
             <iframe
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBJ5LEV-K2PmE12OsC34ZMHWh6r6uvjfbs&q=54B,+Tailstoi+Town,+5238+MT,+La+city,+IA+5224"
+              title="Google Map Location"
+              src={mapSrc} // Use the mapSrc variable
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
