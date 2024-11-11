@@ -83,12 +83,12 @@ function Contact() {
             </div>
             <div className={classes.contactInfo}>
               <button>
-                <Link
-                  to="/contact"
+                <a
+                  href="tel:18004567890"
                   style={{ color: "black", textDecoration: "none" }}
                 >
-                  CONTACT US
-                </Link>
+                  CALL US: 1-800-456-7890
+                </a>
                 <i className="fa fa-arrow-right"></i>
               </button>
             </div>
