@@ -4,6 +4,7 @@ import Home from "./Markup/Pages/Home/Home";
 import Login from "./Markup/Pages/Login/Login";
 import Employee from "./Markup/Pages/Admin/Employee/Employee";
 import Contact from "./Markup/Pages/Contact Us/Contact";
+import About from "./Markup/Pages/About/About"
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
@@ -15,6 +16,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/add-employee" element={<Employee />} />
         <Route path="/Contact" element={<Contact />} />
