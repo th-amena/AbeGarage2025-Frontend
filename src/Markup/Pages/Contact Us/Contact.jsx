@@ -21,8 +21,8 @@ function Contact() {
           {"  "}
           <span>&gt;</span>
           {"  "}
-          <Link style={{ color: "white" }} to="/about">
-            About Us
+          <Link style={{ color: "white" }} to="/contact">
+            Contact Us
           </Link>
         </div>
         <div className={classes.location}>
