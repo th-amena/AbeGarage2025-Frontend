@@ -29,7 +29,7 @@ function Footer() {
                                         <span class="flaticon-email"></span>
                                     </div>
                                     <div class="text">Email us : <br/> <a
-                                            href="mailto:contact.contact@autorex.com">contact@autorex.com</a></div>
+                                            href="mailto:contact.contact@autorex.com">contact@abegarage.com</a></div>
                                 </div>
                             </div>
                         </div>
