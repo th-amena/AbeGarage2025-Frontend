@@ -12,12 +12,6 @@ import Layout from "../../Pages/Layout/Layout"
 
 const Home = () => {
   return (
-<<<<<<< HEAD
-    <Layout>Home</Layout>
-
-  )
-}
-=======
     <Layout>
     
     <div className="page-wrapper">
@@ -39,6 +33,5 @@ const Home = () => {
     </Layout>
   );
 };
->>>>>>> 3a8ac580eb0bc714734f8cc8bf0e830df03f0ebc
 
 export default Home;
