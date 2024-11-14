@@ -1,7 +1,10 @@
 import React from 'react'
 import classes from "./header.module.css"
 import logo from "../../../assets/images/logo.png"
+import {useAuth} from '../../../Contexts/AuthContext'
 function Header() {
+    const {isLogged,isAdmin} = useAuth();
+    console.log(isAdmin);
   return (
     <>
         <header className="main-header header-style-one">
