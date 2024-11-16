@@ -74,7 +74,7 @@ function Header() {
                         <li>
                           <a href="/contact">Contact Us</a>
                         </li>
-                      </ul>
+                    </ul>
                     </div>
                   </nav>
                 </div>
