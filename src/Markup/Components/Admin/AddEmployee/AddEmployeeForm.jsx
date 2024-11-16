@@ -12,8 +12,7 @@ function AddEmployeeForm(props) {
   const [employee_phone, setPhoneNumber] = useState("");
   const [employee_password, setPassword] = useState("");
   const [active_employee, setActive_employee] = useState(1);
-  const [company_role_id, setCompany_role_id] = useState(1);
-  // Errors
+  const [employee_role, setEmployee_role_id] = useState(1);
   const [emailError, setEmailError] = useState("");
   const [firstNameRequired, setFirstNameRequired] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -73,7 +72,7 @@ function AddEmployeeForm(props) {
       employee_phone,
       employee_password,
       active_employee,
-      company_role_id,
+      employee_role,
     };
     // Pass the form data to the service
     const newEmployee = employeeService.createEmployee(
@@ -182,9 +181,9 @@ function AddEmployeeForm(props) {
                     <div className="form-group col-md-12">
                       <select
                         name="employee_role"
-                        value={company_role_id}
+                        value={employee_role}
                         onChange={(event) =>
-                          setCompany_role_id(event.target.value)
+                          setEmployee_role_id(event.target.value)
                         }
                         className="custom-select-box"
                       >
