@@ -1,30 +1,49 @@
 import React from "react";
-import styles from "./AdminDashboard.module.css";
 
-const AdminDashboard = () => {
-  return (
-    <div className={styles.dashboardContainer}>
-      <h1 className={styles.title}>Admin Dashboard</h1>
-      <div className={styles.section}>
-        <h2>Orders</h2>
-        <p>Total Orders: 150</p>
-        <p>Pending: 20 | Completed: 130</p>
-        <a href="/admin/orders">View Details</a>
-        <a href="/admin/orders/add">Add Order</a>
-      </div>
-      <div className={styles.section}>
-        <h2>Employees</h2>
-        <p>Total Employees: 35</p>
-        <a href="/admin/employees">Manage Employees</a>
-        <a href="/admin/employees/add">Add Employee</a>
-      </div>
-      <div className={styles.section}>
-        <h2>Services</h2>
-        <p>Key Services: Service A, Service B, Service C</p>
-        <a href="/admin/services">View All Services</a>
-      </div>
-    </div>
-  );
-};
+// Import the Admin component
+import AdminMenu from "../../../Components/Admin/SideBar/Sidebar";
+import AdminDashboard from "../../../Components/Admin/AdminDashboard/AdminDashboard";
 
-export default AdminDashboard;
+// Import the auth hook context
+import { useAuth } from "../../../../Contexts/AuthContext";
+
+// Import the login component
+import Login from "../../../Pages/Login/Login";
+import Layout from "../../Layout/Layout";
+
+function Admin() {
+  const { isLogged } = useAuth();
+
+  if (typeof isLogged === "undefined") {
+    // Handle the loading state or return null
+    return <div>Loading...</div>; // Optionally, you can show a loader/spinner
+  }
+
+  if (isLogged) {
+    return (
+      <Layout>
+        <div className="container-fluid admin-pages">
+          <div className="row">
+            <div className="col-md-3 admin-left-side">
+              <AdminMenu />
+            </div>
+            <div className="col-md-9 admin-right-side">
+              <AdminDashboard />
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  } else {
+    return (
+      <div className="login-container">
+        <h5 className="login-message" style={{ color: "red" }}>
+          You must log in to access the admin panel.
+        </h5>
+        <Login />
+      </div>
+    );
+  }
+}
+
+export default Admin;
