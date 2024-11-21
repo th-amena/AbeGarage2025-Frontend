@@ -13,6 +13,7 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+import EmployeeUpdate from "./Markup/Pages/Admin/Employee/EmployeeUpdate/EmployeeUpdate";
 function App() {
   return (
     <>
@@ -26,6 +27,12 @@ function App() {
           <AddEmployee />
           </PrivateAuthRoute>}
         />
+<Route path="/employee-update/:uuid" element={
+         <PrivateAuthRoute roles={[3]}>
+          <EmployeeUpdate/>
+          </PrivateAuthRoute>}
+        />
+
         <Route path="/Contact" element={<Contact />} />
       </Routes>
     </>
