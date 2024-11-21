@@ -12,14 +12,14 @@ import Login from "../../../Pages/Login/Login";
 import Layout from "../../Layout/Layout";
 
 function Admin() {
-  const { isLogged } = useAuth();
+  const { isLogged,isAdmin } = useAuth();
 
   if (typeof isLogged === "undefined") {
     // Handle the loading state or return null
     return <div>Loading...</div>; // Optionally, you can show a loader/spinner
   }
 
-  if (isLogged) {
+  // if (isAdmin) {
     return (
       <Layout>
         <div className="container-fluid admin-pages">
@@ -34,16 +34,16 @@ function Admin() {
         </div>
       </Layout>
     );
-  } else {
-    return (
-      <div className="login-container">
-        <h5 className="login-message" style={{ color: "red" }}>
-          You must log in to access the admin panel.
-        </h5>
-        <Login />
-      </div>
-    );
-  }
+  // } else {
+  //   return (
+  //     <div className="login-container">
+  //       <h5 className="login-message" style={{ color: "red" }}>
+  //         You must log in to access the admin panel.
+  //       </h5>
+  //       <Login />
+  //     </div>
+  //   );
+  // }
 }
 
 export default Admin;

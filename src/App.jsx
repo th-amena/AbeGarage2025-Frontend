@@ -31,7 +31,15 @@ function App() {
           }
         />
         {/* Dashboard page route */}
-        <Route path="/admin" element={<Admin />} />
+        {/* <Route path="/admin" element={<Admin />} /> */}
+        <Route
+          path="/admin"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <Admin />
+            </PrivateAuthRoute>
+          }
+        />
         <Route path="/Contact" element={<Contact />} />
       </Routes>
     </>
