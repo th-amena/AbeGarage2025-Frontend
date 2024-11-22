@@ -49,9 +49,9 @@ console.log(loggedInEmployeeToken)
     // Assuming you have a logged-in employee token (e.g., from a context or prop)
     const loggedInEmployeeToken = 'your-logged-in-employee-token';
 
-    // Call the service to create a new employee
+    // Call the service to update a new employee
     employeeService
-      .createEmployee(formData, loggedInEmployeeToken)
+      .updateSingleEmployee(formData, loggedInEmployeeToken)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -87,29 +87,23 @@ console.log(loggedInEmployeeToken)
             })
             .then((data)=>{
                 console.log(data)
-                setFirstName(data?.employee_first_name || '')
-                setLastName(data?.employee_last_name || '')
-                setEmail(data?.employee_email || '');
-                setPhoneNumber(data?.employee_phone || '');
-                setEmployeeRole(data?.employee_role || '1');
-                setActiveEmployee(data?.active_employee || false);
+                setFirstName(data?.employee_first_name)
+                setLastName(data?.employee_last_name)
+                setPhoneNumber(data?.employee_phone)
             })
 
         } catch (error) {
             console.log(error)
         }
-    }; 
-    if(uuid){
-      fetchEmployeeData();
     }
-    
-  },[uuid,loggedInEmployeeToken])
+    fetchEmployeeData();
+  },[])
   return (
     <section className="contact-section">
       <div className="auto-container">
         <div className="contact-title">
           <h2>Edit:{employee_first_name} {employee_last_name} </h2>
-          <p>Employee email: </p>
+          <h4>Employee email:{employee_email}</h4>
         </div>
         <div className="row clearfix">
           <div className="form-column col-lg-7">

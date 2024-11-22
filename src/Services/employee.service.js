@@ -29,12 +29,25 @@ const response = await fetch(`${api_url}/api/employee/${uuid}`, requestOptions);
 return response;
 }
 
-// updat must be done here 
-
+// update function to update employee 
+const updateSingleEmployee = async (uuid, loggedInEmployeeToken) => {
+  const requestOptions = {
+    method: "PT",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": loggedInEmployeeToken,
+    },
+    body: JSON.stringify(uuid),
+  };
+  console.log(requestOptions);
+  const response = await fetch(`${api_url}/api/admin/employee`, requestOptions);
+  return response;
+};
 
 // Export all the functions
 const employeeService = {
   createEmployee,
-  getSingleEmployee
+  getSingleEmployee,
+  updateSingleEmployee
 };
 export default employeeService;
