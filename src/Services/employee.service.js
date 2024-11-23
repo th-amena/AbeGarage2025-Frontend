@@ -30,17 +30,17 @@ return response;
 }
 
 // update function to update employee 
-const updateSingleEmployee = async (uuid, loggedInEmployeeToken) => {
+const updateSingleEmployee = async (formData, loggedInEmployeeToken) => {
   const requestOptions = {
-    method: "PT",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       "x-access-token": loggedInEmployeeToken,
     },
-    body: JSON.stringify(uuid),
+    body: JSON.stringify(formData),
   };
   console.log(requestOptions);
-  const response = await fetch(`${api_url}/api/admin/employee`, requestOptions);
+  const response = await fetch(`${api_url}/api/employee/${formData.uuid}`, requestOptions);
   return response;
 };
 

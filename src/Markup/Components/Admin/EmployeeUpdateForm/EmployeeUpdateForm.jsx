@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import employeeService from '../../../../Services/employee.service';  // Assuming this is the correct path
-import {useAuth} from '../../../../Contexts/AuthContext'
-import { useParams } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import employeeService from "../../../../Services/employee.service"; // Assuming this is the correct path
+import { useAuth } from "../../../../Contexts/AuthContext";
+import { useParams } from "react-router-dom";
 
 function EmployeeUpdateForm() {
   // Define the state for form fields
-  const [employee_email, setEmail] = useState('');
-  const [employee_first_name, setFirstName] = useState('');
-  const [employee_last_name, setLastName] = useState('');
-  const [employee_phone, setPhoneNumber] = useState('');
-  const [employee_password, setPassword] = useState('');
-  const [employee_role, setEmployeeRole] = useState('1'); // Default to 'Employee'
+  const [employee_email, setEmail] = useState("");
+  const [employee_first_name, setFirstName] = useState("");
+  const [employee_last_name, setLastName] = useState("");
+  const [employee_phone, setPhoneNumber] = useState("");
+  const [employee_password, setPassword] = useState("");
+  const [company_role_id, setCompanyRole] = useState("1"); // Default to 'Employee'
   const [active_employee, setActiveEmployee] = useState(false); // Checkbox state
 
   // Define error states
-  const [serverError, setServerError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [firstNameRequired, setFirstNameRequired] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [serverError, setServerError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [firstNameRequired, setFirstNameRequired] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [success, setSuccess] = useState(false);
 
-const{uuid} = useParams();
+  const { uuid } = useParams();
 
   // Create a variable to hold the user's token
   let loggedInEmployeeToken = "";
@@ -30,24 +29,24 @@ const{uuid} = useParams();
   if (employee && employee.employee_token) {
     loggedInEmployeeToken = employee.employee_token;
   }
-console.log(loggedInEmployeeToken)
+  console.log(loggedInEmployeeToken);
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Construct the form data
     const formData = {
+      uuid,
       employee_email,
       employee_first_name,
       employee_last_name,
       employee_phone,
       employee_password,
       active_employee,
-      employee_role,
+      company_role_id,
     };
 
-    // Assuming you have a logged-in employee token (e.g., from a context or prop)
-    const loggedInEmployeeToken = 'your-logged-in-employee-token';
+    
 
     // Call the service to update a new employee
     employeeService
@@ -61,48 +60,54 @@ console.log(loggedInEmployeeToken)
         } else {
           // Handle successful response
           setSuccess(true);
-          setServerError('');
-          setTimeout(() => {
-            window.location.href = '/'; // Redirect to the homepage or other page
-          }, 2000);
+          setServerError("");
+          // setTimeout(() => {
+          //   window.location.href = "/"; // Redirect to the homepage or other page
+          // }, 2000);
         }
       })
       .catch((error) => {
+        console.log(error)
         const resMessage =
-          (error.response && error.response.data && error.response.data.message) ||
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
           error.message ||
           error.toString();
         setServerError(resMessage);
       });
   };
 
-  useEffect(()=>{
-    // function to fetch data 
-    const fetchEmployeeData = async() => {
-        try {
-
-            const data = employeeService?.getSingleEmployee(uuid,loggedInEmployeeToken)
-            .then((res)=>{
-                return res.json()
-            })
-            .then((data)=>{
-                console.log(data)
-                setFirstName(data?.employee_first_name)
-                setLastName(data?.employee_last_name)
-                setPhoneNumber(data?.employee_phone)
-            })
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
+  useEffect(() => {
+    // function to fetch data
+    const fetchEmployeeData = async () => {
+      try {
+        const data = employeeService
+          ?.getSingleEmployee(uuid, loggedInEmployeeToken)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data);
+            setEmail(data?.employee_email)
+            setFirstName(data?.employee_first_name);
+            setLastName(data?.employee_last_name);
+            setPhoneNumber(data?.employee_phone);
+            setCompanyRole(data?.company_role_id);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchEmployeeData();
-  },[])
+  }, []);
   return (
     <section className="contact-section">
       <div className="auto-container">
         <div className="contact-title">
-          <h2>Edit:{employee_first_name} {employee_last_name} </h2>
+          <h2>
+            Edit:{employee_first_name} {employee_last_name}{" "}
+          </h2>
           <h4>Employee email:{employee_email}</h4>
         </div>
         <div className="row clearfix">
@@ -170,9 +175,9 @@ console.log(loggedInEmployeeToken)
                     <div className="form-group col-md-12">
                       <select
                         name="employee_role"
-                        value={employee_role}
+                        value={company_role_id}
                         onChange={(event) =>
-                          setEmployeeRole(event.target.value)
+                          setCompanyRole(event.target.value)
                         }
                         className="custom-select-box"
                       >
@@ -202,7 +207,9 @@ console.log(loggedInEmployeeToken)
                         <input
                           type="checkbox"
                           checked={active_employee}
-                          onChange={(event) => setActiveEmployee(event.target.checked)}
+                          onChange={(event) =>
+                            setActiveEmployee(event.target.checked)
+                          }
                         />
                         Is active employee
                       </label>
