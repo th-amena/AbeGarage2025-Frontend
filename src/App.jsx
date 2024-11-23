@@ -24,7 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route
-          path="/add-employee"
+          path="admin/add-employee"
           element={
             <PrivateAuthRoute roles={[3]}>
               <AddEmployee />
@@ -36,6 +36,8 @@ function App() {
           element={
             <PrivateAuthRoute roles={[3]}>
               <EmployeesList />
+              </PrivateAuthRoute>
+          }/> 
         {/* Dashboard page route */}
         {/* <Route path="/admin" element={<Admin />} /> */}
         <Route
@@ -47,7 +49,7 @@ function App() {
           }
         />
         <Route path="/Contact" element={<Contact />} />
-      </Routes>
+        </Routes>
     </>
   );
 }
