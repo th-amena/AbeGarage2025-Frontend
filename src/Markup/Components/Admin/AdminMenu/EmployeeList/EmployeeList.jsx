@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {Table} from 'react-bootstrap'
-import { useAuth } from "../../../../../Contexts/AuthContext";
-// import { format } from "date-fns";
+import {useAuth} from "../../../.././../Contexts/AuthContext"
 import employeeService from "../../../../../Services/employee.service"
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { format } from "date-fns";
-
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const EmployeesList = () => {
   const [employees, setEmployees] = useState([]);
@@ -16,7 +18,33 @@ const EmployeesList = () => {
   if (employee) {
     token = employee.employee_token;
   }
-
+  const editEmployee = (uuid) => {
+    navigate(`/admin/update/employee/${uuid}`);
+  };
+  const deleteEmployee = (uuid) => {
+    confirmAlert({
+      title: "Confirm to delete",
+      message: "Are you sure to delete this employee.",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () =>
+            employeeService
+              .deleteEmployee(uuid, token)
+              .then((res) => {
+                return res.json();
+              })
+              .then((data) => {
+                console.log(data.message);
+                alert(data.message);
+              }),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
   useEffect(() => {
     // Call the getAllEmployees function
     const allEmployees = employeeService.getAllEmployees(token);
@@ -42,7 +70,7 @@ const EmployeesList = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   }, []);
 
@@ -77,7 +105,7 @@ const EmployeesList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {employees.map((employee) => (
+                  {employees?.map((employee) => (
                     <tr key={employee?.employee_id}>
                       <td>{employee?.active_employee ? "Yes" : "No"}</td>
                       <td>{employee?.employee_first_name}</td>
@@ -92,7 +120,20 @@ const EmployeesList = () => {
                       </td>
                       <td>{employee?.company_role_name}</td>
                       <td>
-                        <div className="edit-delete-icons">edit | delete</div>
+                        <div className="edit-delete-icons">
+                          <button
+                            onClick={() => editEmployee(employee.employee_uuid)}
+                          >
+                            <FaEdit />
+                          </button>
+                          <button
+                            onClick={() =>
+                              deleteEmployee(employee.employee_uuid)
+                            }
+                          >
+                            <MdDelete />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
