@@ -14,6 +14,19 @@ const createEmployee = async (formData, loggedInEmployeeToken) => {
   const response = await fetch(`${api_url}/api/admin/employee`, requestOptions);
   return response;
 };
+// A function to send  get request to get all employees
+const getAllEmployees = async (token) => {
+ const requestOptions = {
+   method: "GET",
+   headers: {
+     "Content-Type": "application/json",
+     "x-access-token": token,
+   },
+   
+ };
+ const response = await fetch(`${api_url}/api/employees`, requestOptions);
+ return response;
+}
 
 const getSingleEmployee = async(uuid, loggedInEmployeeToken) => {
 
@@ -47,6 +60,7 @@ const updateSingleEmployee = async (formData, loggedInEmployeeToken) => {
 // Export all the functions
 const employeeService = {
   createEmployee,
+  getAllEmployees,
   getSingleEmployee,
   updateSingleEmployee
 };
