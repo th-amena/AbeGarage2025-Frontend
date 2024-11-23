@@ -13,6 +13,7 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+import EmployeesList from "./Markup/Pages/Admin/Employee/EmployeeList/EmployeeList";
 import Admin from "./Markup/Pages/Admin/AdminDashboard/Admin";
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+        <Route
+          path="/admin/employees"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <EmployeesList />
         {/* Dashboard page route */}
         {/* <Route path="/admin" element={<Admin />} /> */}
         <Route
