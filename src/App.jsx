@@ -36,6 +36,8 @@ function App() {
           element={
             <PrivateAuthRoute roles={[3]}>
               <EmployeesList />
+              </PrivateAuthRoute>
+          }/> 
         {/* Dashboard page route */}
         {/* <Route path="/admin" element={<Admin />} /> */}
         <Route
@@ -47,7 +49,7 @@ function App() {
           }
         />
         <Route path="/Contact" element={<Contact />} />
-      </Routes>
+        </Routes>
     </>
   );
 }
