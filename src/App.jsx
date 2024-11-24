@@ -14,8 +14,11 @@ import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
 import EmployeesList from "./Markup/Pages/Admin/Employee/EmployeeList/EmployeeList";
+import EmployeeUpdate from "./Markup/Pages/Admin/Employee/EmployeeUpdate/EmployeeUpdate";
 import Admin from "./Markup/Pages/Admin/AdminDashboard/Admin";
+
 function App() {
+
   return (
     <>
       <Routes>
@@ -36,8 +39,8 @@ function App() {
           element={
             <PrivateAuthRoute roles={[3]}>
               <EmployeesList />
-              </PrivateAuthRoute>
-          }/> 
+             </PrivateAuthRoute> } />
+              
         {/* Dashboard page route */}
         {/* <Route path="/admin" element={<Admin />} /> */}
         <Route
@@ -48,6 +51,12 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+<Route path="/admin/employee-update/:uuid" element={
+         <PrivateAuthRoute roles={[3]}>
+          <EmployeeUpdate/>
+          </PrivateAuthRoute>}
+        />
+
         <Route path="/Contact" element={<Contact />} />
         </Routes>
     </>
