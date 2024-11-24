@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import employeeService from "../../../../Services/employee.service"; // Assuming this is the correct path
 import { useAuth } from "../../../../Contexts/AuthContext";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 function EmployeeUpdateForm() {
   // Define the state for form fields
@@ -20,6 +20,7 @@ function EmployeeUpdateForm() {
   const [passwordError, setPasswordError] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const navigate =useNavigate();
   const { uuid } = useParams();
 
   // Create a variable to hold the user's token
@@ -61,9 +62,7 @@ function EmployeeUpdateForm() {
           // Handle successful response
           setSuccess(true);
           setServerError("");
-          // setTimeout(() => {
-          //   window.location.href = "/"; // Redirect to the homepage or other page
-          // }, 2000);
+          navigate('/admin/employees')
         }
       })
       .catch((error) => {

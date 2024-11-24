@@ -7,11 +7,13 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { format } from "date-fns";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const EmployeesList = () => {
   const [employees, setEmployees] = useState([]);
   const [apiError, setApiError] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState(null);
+  const navigate = useNavigate();
   // To get the logged in employee token
   const { employee } = useAuth();
   let token = null; // To store the token
@@ -19,7 +21,7 @@ const EmployeesList = () => {
     token = employee.employee_token;
   }
   const editEmployee = (uuid) => {
-    navigate(`/admin/update/employee/${uuid}`);
+    navigate(`/admin/employee-update/${uuid}`);
   };
   const deleteEmployee = (uuid) => {
     confirmAlert({
@@ -37,7 +39,11 @@ const EmployeesList = () => {
               .then((data) => {
                 console.log(data.message);
                 alert(data.message);
-              }),
+              })
+            .catch((error) => {
+              console.log(error)
+            })
+
         },
         {
           label: "No",
@@ -72,7 +78,7 @@ const EmployeesList = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [employees]);
 
   return (
     <>
