@@ -65,7 +65,7 @@ Develop the Service Management Page for admins to view, add, edit, and delete se
 **Task Title:** Implement Customer List Page with Search Functionality and Pagination  
 **Description:**  
 Develop the Customer List component to display a list of all customers, including basic information such as customer ID, name, and contact information. Implement search functionality to filter the list based on specific criteria.  
-**Assignee:** Gash Dawit  
+**Assignee:** Gash Dawit , Wonde
 **Time Frame:** Day 3  
 
 ---
