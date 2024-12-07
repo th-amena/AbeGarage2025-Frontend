@@ -17,6 +17,7 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustomer";
 function App() {
   return (
      <>
@@ -60,6 +61,17 @@ function App() {
                  </PrivateAuthRoute>
               }
            />
+
+            {/* for editing customer list , can be removed later */}
+            <Route
+              path="/admin/customer-update/:customer_hash"
+              element={
+                 <PrivateAuthRoute roles={[3]}>
+                    <EditCustomer />
+                 </PrivateAuthRoute>
+              }
+           />
+
            <Route
               path="/admin/order"
               element={
