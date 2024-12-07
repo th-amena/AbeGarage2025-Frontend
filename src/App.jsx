@@ -3,8 +3,12 @@ import "./App.css";
 import Home from "./Markup/Pages/Home/Home";
 import Login from "./Markup/Pages/Login/Login";
 import AddEmployee from "./Markup/Pages/Admin/Employee/AddEmployee/AddEmployee";
+
+import EmployeesList from "./Markup/Pages/Admin/Employee/EmployeeList/EmployeeList";
+
 import EmployeesList from "./Markup/Pages/Admin/Employee/EmployeeList/EmployeeList"
 import AddCustomer from "./Markup/Pages/Admin/Customer/addCustomer/addCustomer";
+
 import Admin from "./Markup/Pages/Admin/AdminDashboard/Admin";
 import EmployeeUpdate from "./Markup/Pages/Admin/Employee/EmployeeUpdate/EmployeeUpdate";
 import Contact from "./Markup/Pages/Contact Us/Contact";
@@ -18,7 +22,13 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+
+import Services from "./Markup/Pages/Admin/Services/Services";
+import { Edit } from "@mui/icons-material";
+import EditServices from "./Markup/Pages/Admin/EditServices/EditServices";
+
 import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustomer";
+
 function App() {
   return (
     <>
@@ -43,6 +53,10 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+
+
+        {/* Dashboard page route */}
+
            {/* Dashboard page route */}
            {/* <Route path="/admin" element={<Admin />} /> */}
            <Route
@@ -92,6 +106,7 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+
         {/* <Route path="/admin" element={<Admin />} /> */}
         <Route
           path="/admin"
@@ -118,6 +133,15 @@ function App() {
           }
         />
         <Route path="/Contact" element={<Contact />} />
+
+        {/* Services page routes start Here */}
+        <Route path="/admin/services" element={<Services />} />
+        <Route
+          path={`/admin/services/service-update/:id`}
+          element={<EditServices />}
+        />
+        {/* Services page routes end Here */}
+
       </Routes>
     </>
   );
