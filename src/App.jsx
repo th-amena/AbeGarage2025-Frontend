@@ -3,7 +3,12 @@ import "./App.css";
 import Home from "./Markup/Pages/Home/Home";
 import Login from "./Markup/Pages/Login/Login";
 import AddEmployee from "./Markup/Pages/Admin/Employee/AddEmployee/AddEmployee";
+
 import EmployeesList from "./Markup/Pages/Admin/Employee/EmployeeList/EmployeeList";
+
+import EmployeesList from "./Markup/Pages/Admin/Employee/EmployeeList/EmployeeList"
+import AddCustomer from "./Markup/Pages/Admin/Customer/addCustomer/addCustomer";
+
 import Admin from "./Markup/Pages/Admin/AdminDashboard/Admin";
 import EmployeeUpdate from "./Markup/Pages/Admin/Employee/EmployeeUpdate/EmployeeUpdate";
 import Contact from "./Markup/Pages/Contact Us/Contact";
@@ -17,9 +22,13 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+
 import Services from "./Markup/Pages/Admin/Services/Services";
 import { Edit } from "@mui/icons-material";
 import EditServices from "./Markup/Pages/Admin/EditServices/EditServices";
+
+import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustomer";
+
 function App() {
   return (
     <>
@@ -45,7 +54,59 @@ function App() {
           }
         />
 
+
         {/* Dashboard page route */}
+
+           {/* Dashboard page route */}
+           {/* <Route path="/admin" element={<Admin />} /> */}
+           <Route
+              path="/admin"
+              element={
+                 <PrivateAuthRoute roles={[3]}>
+                    <Admin />
+                 </PrivateAuthRoute>
+              }
+           />
+           <Route
+              path="/admin/employee-update/:uuid"
+              element={
+                 <PrivateAuthRoute roles={[3]}>
+                    <EmployeeUpdate />
+                 </PrivateAuthRoute>
+              }
+           />
+
+            {/* for editing customer list , can be removed later */}
+            <Route
+              path="/admin/customer-update/:customer_hash"
+              element={
+                 <PrivateAuthRoute roles={[3]}>
+                    <EditCustomer />
+                 </PrivateAuthRoute>
+              }
+           />
+
+           <Route
+              path="/admin/order"
+              element={
+                 <PrivateAuthRoute roles={[1, 2, 3]}>
+                    <NewOrders />
+                 </PrivateAuthRoute>
+              }
+           />
+           <Route path="/Contact" element={<Contact />} />
+        </Routes>
+     </>
+        {/* Dashboard page route */}
+        <Route
+          path="/admin/add-customer"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <AddCustomer/>
+            </PrivateAuthRoute>
+          }
+        />
+
         {/* <Route path="/admin" element={<Admin />} /> */}
         <Route
           path="/admin"
@@ -72,6 +133,7 @@ function App() {
           }
         />
         <Route path="/Contact" element={<Contact />} />
+
         {/* Services page routes start Here */}
         <Route path="/admin/services" element={<Services />} />
         <Route
@@ -79,6 +141,7 @@ function App() {
           element={<EditServices />}
         />
         {/* Services page routes end Here */}
+
       </Routes>
     </>
   );
