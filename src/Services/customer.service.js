@@ -8,27 +8,27 @@ if (!api_url) {
 }
 
 // A function to send a POST request to create a new customer
-// const createCustomer = async (formData, loggedInEmployeeToken) => {
-//    if (!loggedInEmployeeToken) {
-//       throw new Error("Employee token is missing. Please log in again.");
-//    }
+const createCustomer = async (formData, loggedInEmployeeToken) => {
+   if (!loggedInEmployeeToken) {
+      throw new Error("Employee token is missing. Please log in again.");
+   }
 
-//    const requestOptions = {
-//       method: "POST",
-//       headers: {
-//          "Content-Type": "application/json",
-//          "x-access-token": loggedInEmployeeToken,
-//       },
-//       body: JSON.stringify(formData),
-//    };
+   const requestOptions = {
+      method: "POST",
+      headers: {
+         "Content-Type": "application/json",
+         "x-access-token": loggedInEmployeeToken,
+      },
+      body: JSON.stringify(formData),
+   };
 
-//    const response = await fetch(`${api_url}/api/customers`, requestOptions);
-//    if (!response.ok) {
-//       const error = await response.json();
-//       throw new Error(error.message || "Failed to create customer");
-//    }
-//    return await response.json();
-// };
+   const response = await fetch(`${api_url}/api/add-customer`, requestOptions);
+   if (!response==200) {
+      const error = await response.json();
+      throw new Error(error.message || "Failed to create customer");
+   }
+   return  response;
+};
 
 // A function to fetch all customers (GET request)
 const getAllCustomers = async (token) => {
@@ -133,7 +133,7 @@ const updateSingleCustomer = async (formData, loggedInEmployeeToken) => {
 
 // Export all the functions
 const customerService = {
-//    createCustomer,
+   createCustomer,
    getAllCustomers,
    getCustomerById,
    searchCustomers,
