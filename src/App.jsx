@@ -18,7 +18,7 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
-
+import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustomer";
 function App() {
   return (
     <>
@@ -43,7 +43,46 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+           {/* Dashboard page route */}
+           {/* <Route path="/admin" element={<Admin />} /> */}
+           <Route
+              path="/admin"
+              element={
+                 <PrivateAuthRoute roles={[3]}>
+                    <Admin />
+                 </PrivateAuthRoute>
+              }
+           />
+           <Route
+              path="/admin/employee-update/:uuid"
+              element={
+                 <PrivateAuthRoute roles={[3]}>
+                    <EmployeeUpdate />
+                 </PrivateAuthRoute>
+              }
+           />
 
+            {/* for editing customer list , can be removed later */}
+            <Route
+              path="/admin/customer-update/:customer_hash"
+              element={
+                 <PrivateAuthRoute roles={[3]}>
+                    <EditCustomer />
+                 </PrivateAuthRoute>
+              }
+           />
+
+           <Route
+              path="/admin/order"
+              element={
+                 <PrivateAuthRoute roles={[1, 2, 3]}>
+                    <NewOrders />
+                 </PrivateAuthRoute>
+              }
+           />
+           <Route path="/Contact" element={<Contact />} />
+        </Routes>
+     </>
         {/* Dashboard page route */}
         <Route
           path="/admin/add-customer"
