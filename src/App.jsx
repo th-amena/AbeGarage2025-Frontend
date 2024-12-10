@@ -17,6 +17,7 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+import Orders from "./Markup/Pages/Admin/OrdersList/Orders";
 function App() {
   return (
      <>
@@ -57,6 +58,7 @@ function App() {
               element={
                  <PrivateAuthRoute roles={[3]}>
                     <EmployeeUpdate />
+                    
                  </PrivateAuthRoute>
               }
            />
@@ -68,8 +70,14 @@ function App() {
                  </PrivateAuthRoute>
               }
            />
+           <Route path="/admin/orders" element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+               <Orders />
+            </PrivateAuthRoute>
+           } />
            <Route path="/Contact" element={<Contact />} />
         </Routes>
+        
      </>
   );
 }
