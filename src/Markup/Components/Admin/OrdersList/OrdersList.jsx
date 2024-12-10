@@ -11,7 +11,7 @@ const OrdersPage = () => {
     const fetchOrders = async () => {
       try {
         const ordersData = await orderService.getOrders();
-        const data = await ordersData.json();
+        const data = await ordersData.data;
         setOrders(data);
       } catch (error) {
         setError(error.message || "Failed to fetch orders.");
@@ -94,7 +94,7 @@ const OrdersPage = () => {
                   </td>
                   <td>
                     <a
-                      href={/order-details/`${order.order_hash}`}
+                      href={`/order-details/${order.order_hash}`}
                       className={styles.viewEditLink}
                     >
                       <i className="bi bi-eye"></i>
