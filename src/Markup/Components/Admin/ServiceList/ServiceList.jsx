@@ -28,7 +28,7 @@ const ServiceList = () => {
       }
     };
     fetchServices();
-  }, [loggedInEmployeeToken]);
+  }, [allServices]);
 
   const handleAddService = async (event) => {
     event.preventDefault();

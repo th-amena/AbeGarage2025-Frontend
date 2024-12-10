@@ -60,7 +60,7 @@ const singleService = async (id, loggedInEmployeeToken) => {
 };
 
 const deleteService = async (serviceId, loggedInEmployeeToken) => {
-  const response = await fetch(`${api_url}/api/service/${serviceId}`, {
+  const response = await fetch(`${api_url}/api/delete-service/${serviceId}`, {
     method: "DELETE",
     headers: {
       "x-access-token": loggedInEmployeeToken,
