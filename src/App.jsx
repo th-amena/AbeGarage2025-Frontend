@@ -79,18 +79,21 @@ function App() {
             </PrivateAuthRoute>
           }
         />
-        <Route path="/admin/orders" element={
+        <Route
+          path="/admin/orders"
+          element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
-               <Orders />
+              <Orders />
             </PrivateAuthRoute>
-           } />
-         <Route
-           path="/admin/orders/:order_hash"
-           element={
-       <PrivateAuthRoute roles={[3, 2, 1]}>
-      <OrderDetailsPage />
-       </PrivateAuthRoute>
-       }
+          }
+        />
+        <Route
+          path="/admin/orders/:order_hash"
+          element={
+            <PrivateAuthRoute roles={[3, 2, 1]}>
+              <OrderDetailsPage />
+            </PrivateAuthRoute>
+          }
         />
         <Route path="/Contact" element={<Contact />} />
         <Route

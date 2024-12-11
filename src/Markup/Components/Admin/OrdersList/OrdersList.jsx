@@ -97,7 +97,7 @@ const OrdersPage = () => {
                   <td>
                     <span style={{ marginRight: "20px" }}>
                       <a
-                        href={`/order-details/${order.order_hash}`}
+                        href={`/admin/orders/${order.order_hash}`}
                         className={styles.viewEditLink}
                       >
                         <FaArrowUpRightFromSquare color="#081336" />
