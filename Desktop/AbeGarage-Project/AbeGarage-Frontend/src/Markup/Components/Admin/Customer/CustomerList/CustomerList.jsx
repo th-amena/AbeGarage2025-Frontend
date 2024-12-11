@@ -15,7 +15,7 @@ function CustomerList() {
       .getAllCustomers()
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data);
+        console.log(data);
         setCustomers(data);
       })
       .catch((error) => console.error(error));
