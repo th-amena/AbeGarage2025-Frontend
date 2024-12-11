@@ -19,17 +19,17 @@ const getOrders = async () => {
   };
 
   const response = await fetch(`${api_url}/api/orders`, requestOptions);
-  // console.log(response);
+  const data = await response.json();
+  // console.log(data);
 
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.message || "Failed to fetch orders.");
   }
 
-  const data = await response.json();
-  return data.orders; // Assuming the API returns an object with an orders array
+  return data; // Assuming the API returns an object with an orders array
 };
 
 export default {
-getOrders,
+  getOrders,
 };

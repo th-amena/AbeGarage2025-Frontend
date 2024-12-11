@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./OrdersList.module.css";
 import orderService from "../../../../Services/order.service";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
@@ -12,6 +14,7 @@ const OrdersPage = () => {
       try {
         const ordersData = await orderService.getOrders();
         const data = await ordersData.data;
+        // console.log(data);
         setOrders(data);
       } catch (error) {
         setError(error.message || "Failed to fetch orders.");
@@ -25,7 +28,6 @@ const OrdersPage = () => {
 
   console.log(orders);
   return (
-    
     <div className={`container-fluid ${styles.ordersPage}`}>
       <h1 className={styles.pageTitle}>
         Orders
@@ -36,7 +38,7 @@ const OrdersPage = () => {
       ) : error ? (
         <p className="text-danger">{error}</p>
       ) : (
-        <div className={table-responsive `${styles.ordersTable}`}>
+        <div className={`table-responsive ${styles.ordersTable}`}>
           <table className="table table-bordered">
             <thead className={styles.tableHeader}>
               <tr>
@@ -93,12 +95,22 @@ const OrdersPage = () => {
                     </span>
                   </td>
                   <td>
-                    <a
-                      href={`/order-details/${order.order_hash}`}
-                      className={styles.viewEditLink}
-                    >
-                      <i className="bi bi-eye"></i>
-                    </a>
+                    <span style={{ marginRight: "20px" }}>
+                      <a
+                        href={`/order-details/${order.order_hash}`}
+                        className={styles.viewEditLink}
+                      >
+                        <FaArrowUpRightFromSquare color="#081336" />
+                      </a>
+                    </span>
+                    <span>
+                      <a
+                        href={`/order-update/${order.order_hash}`}
+                        className={styles.viewEditLink}
+                      >
+                        <FaEdit color="#081336" />
+                      </a>
+                    </span>
                   </td>
                 </tr>
               ))}
