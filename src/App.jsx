@@ -17,60 +17,62 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+import Services from "./Markup/Pages/Services/Services";
 function App() {
   return (
-     <>
-        <Routes>
-           <Route path="/" element={<Home />} />
-           <Route path="/about" element={<About />} />
-           <Route path="/login" element={<Login />} />
-           <Route path="/unauthorized" element={<Unauthorized />} />
-           <Route
-              path="admin/add-employee"
-              element={
-                 <PrivateAuthRoute roles={[3]}>
-                    <AddEmployee />
-                 </PrivateAuthRoute>
-              }
-           />
-           <Route
-              path="/admin/employees"
-              element={
-                 <PrivateAuthRoute roles={[3]}>
-                    <EmployeesList />
-                 </PrivateAuthRoute>
-              }
-           />
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route
+          path="admin/add-employee"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <AddEmployee />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="/admin/employees"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <EmployeesList />
+            </PrivateAuthRoute>
+          }
+        />
 
-           {/* Dashboard page route */}
-           {/* <Route path="/admin" element={<Admin />} /> */}
-           <Route
-              path="/admin"
-              element={
-                 <PrivateAuthRoute roles={[3]}>
-                    <Admin />
-                 </PrivateAuthRoute>
-              }
-           />
-           <Route
-              path="/admin/employee-update/:uuid"
-              element={
-                 <PrivateAuthRoute roles={[3]}>
-                    <EmployeeUpdate />
-                 </PrivateAuthRoute>
-              }
-           />
-           <Route
-              path="/admin/order"
-              element={
-                 <PrivateAuthRoute roles={[1, 2, 3]}>
-                    <NewOrders />
-                 </PrivateAuthRoute>
-              }
-           />
-           <Route path="/Contact" element={<Contact />} />
-        </Routes>
-     </>
+        {/* Dashboard page route */}
+        {/* <Route path="/admin" element={<Admin />} /> */}
+        <Route
+          path="/admin"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <Admin />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="/admin/employee-update/:uuid"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <EmployeeUpdate />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="/admin/order"
+          element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+              <NewOrders />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+      </Routes>
+    </>
   );
 }
 
