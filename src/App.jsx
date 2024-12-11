@@ -22,6 +22,7 @@ import Services from "./Markup/Pages/Admin/Services/Services";
 import EditServices from "./Markup/Pages/Admin/EditServices/EditServices";
 import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustomer";
 import Orders from "./Markup/Pages/Admin/OrdersList/Orders";
+import OrderDetailsPage from "./Markup/Pages/Admin/OrderDetailsPage/OrderDetailsPage";
 function App() {
   return (
     <>
@@ -83,6 +84,14 @@ function App() {
                <Orders />
             </PrivateAuthRoute>
            } />
+         <Route
+           path="/admin/orders/:order_hash"
+           element={
+       <PrivateAuthRoute roles={[3, 2, 1]}>
+      <OrderDetailsPage />
+       </PrivateAuthRoute>
+       }
+        />
         <Route path="/Contact" element={<Contact />} />
         <Route
           path="/admin/add-customer"
