@@ -21,7 +21,7 @@ import Unauthorized from "./Markup/Pages/Unauthorized";
 import Services from "./Markup/Pages/Admin/Services/Services";
 import EditServices from "./Markup/Pages/Admin/EditServices/EditServices";
 import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustomer";
-
+import Orders from "./Markup/Pages/Admin/OrdersList/Orders";
 function App() {
   return (
     <>
@@ -78,6 +78,11 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+        <Route path="/admin/orders" element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+               <Orders />
+            </PrivateAuthRoute>
+           } />
         <Route path="/Contact" element={<Contact />} />
         <Route
           path="/admin/add-customer"
