@@ -10,7 +10,7 @@ function Services() {
   return (
     <Layout>
       <div className={classes.contactus}>
-        <h1>Our Services</h1>
+        <h1 style={{ paddingLeft: "0px" }}>Our Services</h1>
         <Link className={classes.home} to="/">
           Home
         </Link>
