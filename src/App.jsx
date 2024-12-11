@@ -18,11 +18,13 @@ import "./assets/template_assets/css/color.css";
 import "./assets/styles/custom.css";
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute";
 import Unauthorized from "./Markup/Pages/Unauthorized";
+import Services from "./Markup/Pages/Services/Services";
 import Services from "./Markup/Pages/Admin/Services/Services";
 import EditServices from "./Markup/Pages/Admin/EditServices/EditServices";
 import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustomer";
 import Orders from "./Markup/Pages/Admin/OrdersList/Orders";
 import OrderDetailsPage from "./Markup/Pages/Admin/OrderDetailsPage/OrderDetailsPage";
+
 function App() {
   return (
     <>
@@ -47,6 +49,11 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+
+
+        {/* Dashboard page route */}
+        {/* <Route path="/admin" element={<Admin />} /> */}
+
         <Route
           path="/admin"
           element={
@@ -64,6 +71,7 @@ function App() {
           }
         />
         <Route
+
           path="/admin/customer-update/:customer_hash"
           element={
             <PrivateAuthRoute roles={[3]}>
@@ -72,6 +80,7 @@ function App() {
           }
         />
         <Route
+
           path="/admin/order"
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
@@ -79,6 +88,10 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+
         <Route
           path="/admin/orders"
           element={
@@ -111,6 +124,7 @@ function App() {
           element={<EditServices />}
         />
         {/* Services page routes end Here */}
+
       </Routes>
     </>
   );
