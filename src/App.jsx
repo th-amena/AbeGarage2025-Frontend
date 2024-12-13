@@ -25,6 +25,7 @@ import EditCustomer from "./Markup/Pages/Admin/Customer/EditCustomer/EditCustome
 import Orders from "./Markup/Pages/Admin/OrdersList/Orders";
 import OrderDetailsPage from "./Markup/Pages/Admin/OrderDetailsPage/OrderDetailsPage";
 import CustomerProfile from "./Markup/Pages/Admin/Customer/CustomerProfile/CustomerProfile";
+import CustomerList from "./Markup/Pages/Admin/Customer/CustomerList/CustomerList"
 
 function App() {
   return (
@@ -79,6 +80,14 @@ function App() {
           }
         />
         <Route
+          path="/admin/customers"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <CustomerList />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
           path="/admin/order"
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
@@ -120,7 +129,7 @@ function App() {
           path="/admin/customer-profile/:customer_hash"
           element={
             <PrivateAuthRoute roles={[2, 3]}>
-              <CustomerProfile   />
+              <CustomerProfile />
             </PrivateAuthRoute>
           }
         />
