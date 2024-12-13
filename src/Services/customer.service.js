@@ -130,7 +130,6 @@ const updateSingleCustomer = async (formData, loggedInEmployeeToken) => {
    const response = await fetch(`${api_url}/api/update-customer/${formData.customer_hash}`, requestOptions);
    return response;
  };
-
 // Export all the functions
 const customerService = {
    createCustomer,
