@@ -25,7 +25,21 @@ const getOrderById = async (order_hash) => {
   }
   return response;
 };
-
+//A function to get customer order
+const getSingleCustomerOrders = async (customer_hash, token) => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  const response = await fetch(
+    `${api_url}/api/customer/orders/${customer_hash}`,
+    requestOptions
+  );
+  return response;
+};
 /**
  * Fetch all orders
  * Used for OrdersPage
@@ -49,7 +63,9 @@ const getOrders = async () => {
 
   return data; // Assuming the API returns an object with an orders array
 };
+
 export default {
+  getSingleCustomerOrders,
   getOrders,
   getOrderById,
 };
