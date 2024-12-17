@@ -27,6 +27,8 @@ import OrderDetailsPage from "./Markup/Pages/Admin/OrderDetailsPage/OrderDetails
 import CustomerProfile from "./Markup/Pages/Admin/Customer/CustomerProfile/CustomerProfile";
 import CustomerList from "./Markup/Pages/Admin/Customer/CustomerList/CustomerList";
 import SelectVehicle from "./Markup/pages/Admin/SelectVehicle/SelectVehicle";
+import CreateOrder from "./Markup/pages/Admin/CreateOrder/CreateOrder";
+
 
 function App() {
   return (
@@ -103,11 +105,11 @@ function App() {
           path="/admin/services"
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
-              <Services/>
+              <Services />
             </PrivateAuthRoute>
           }
         />
-       
+
         <Route
           path="/admin/orders"
           element={
@@ -121,6 +123,14 @@ function App() {
           element={
             <PrivateAuthRoute roles={[3, 2, 1]}>
               <OrderDetailsPage />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="/admin/order/add-new-order/select-service/:customer_hash/:vehicle_id"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <CreateOrder />
             </PrivateAuthRoute>
           }
         />
