@@ -27,6 +27,8 @@ import OrderDetailsPage from "./Markup/Pages/Admin/OrderDetailsPage/OrderDetails
 import CustomerProfile from "./Markup/Pages/Admin/Customer/CustomerProfile/CustomerProfile";
 import CustomerList from "./Markup/Pages/Admin/Customer/CustomerList/CustomerList";
 import SelectVehicle from "./Markup/pages/Admin/SelectVehicle/SelectVehicle";
+import VehicleUpdate from "./Markup/Pages/Admin/VehicleUpdate/VehicleUpdate";
+
 
 function App() {
   return (
@@ -158,7 +160,19 @@ function App() {
           element={<EditServices />}
         />
         {/* Services page routes end Here */}
+
+          {/* to update vehicle info */}
+        <Route
+          path="/admin/edit-vehicle/:id"
+          element={
+            <PrivateAuthRoute roles={[2, 3]}>
+              <VehicleUpdate />
+            </PrivateAuthRoute>
+          }
+        />
       </Routes>
+
+
     </>
   );
 }

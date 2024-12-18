@@ -28,5 +28,18 @@ const getSingleVehicle = async (customer_hash,token) => {
     );
     return response;
 }
-const vehicleService = {getSingleVehicle,addVehicle};
+  // A function to update a vehicle info
+const updateVehicle = async (vehicleId, data, token) => {
+    const requestOptions = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token, // Ensure token is included
+        },
+        body: JSON.stringify(data), // Convert data to JSON
+    };
+    const response = await fetch(`${api_url}/api/vehicle/${vehicleId}`, requestOptions);
+    return response.json(); // Return the parsed response as JSON
+};
+const vehicleService = {getSingleVehicle,addVehicle,updateVehicle};
 export default vehicleService;
