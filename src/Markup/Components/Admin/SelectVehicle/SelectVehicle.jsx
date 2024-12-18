@@ -21,10 +21,10 @@ function CustomerProfile() {
   if (employee && employee.employee_token) {
     token = employee.employee_token;
   }
-  const handleSelectCustomer = (customer_hash) => {
+  const handleSelectCustomer = (customer_hash, vehicle_id) => {
     // e.preventDefault();
     navigator(
-      `/admin/order/add-new-order/select-service/${customer_hash}/${vehicles.vehicle_id}`
+      `/admin/order/add-new-order/select-service/${customer_hash}/${vehicle_id}`
     );
   };
   useEffect(() => {
@@ -115,7 +115,10 @@ function CustomerProfile() {
                           color="#EE0D19"
                           className={styles.pointerIcon}
                           onClick={() =>
-                            handleSelectCustomer(customer.customer_hash)
+                            handleSelectCustomer(
+                              customer.customer_hash,
+                              vehicles.vehicle_id
+                            )
                           }
                         />
                       </button>

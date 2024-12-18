@@ -5,7 +5,19 @@ if (!api_url) {
     "API URL is not defined. Please check your environment variables."
   );
 }
-
+const createNewOrder = (newOrder, token) => {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+    body: JSON.stringify(newOrder),
+  };
+  console.log(requestOptions);
+  const response = fetch(`${api_url}/api/order`, requestOptions);
+  return response;
+};
 // Function to fetch order details by ID
 const getOrderById = async (order_hash) => {
   const requestOptions = {
@@ -65,6 +77,7 @@ const getOrders = async () => {
 };
 
 export default {
+  createNewOrder,
   getSingleCustomerOrders,
   getOrders,
   getOrderById,
