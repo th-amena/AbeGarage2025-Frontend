@@ -13,7 +13,7 @@ const addVehicle = async (data, token) => {
     const response = await fetch(`${api_url}/api/vehicle`, requestOptions);
     return response;
 }
-//A function to send get request to get single vehiclee for customer
+//A function to send get request to get all  vehicles for customer
 const getSingleVehicle = async (customer_hash,token) => {
     const requestOptions = {
         method: "GET",
@@ -28,18 +28,41 @@ const getSingleVehicle = async (customer_hash,token) => {
     );
     return response;
 }
-  // A function to update a vehicle info
-const updateVehicle = async (vehicleId, data, token) => {
+
+
+  // function to get single vehicle  for a single vehicle 
+  const getVehicleById = async (id) => {
     const requestOptions = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "x-access-token": token, // Ensure token is included
-        },
-        body: JSON.stringify(data), // Convert data to JSON
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
-    const response = await fetch(`${api_url}/api/vehicle/${vehicleId}`, requestOptions);
-    return response.json(); // Return the parsed response as JSON
-};
-const vehicleService = {getSingleVehicle,addVehicle,updateVehicle};
+    const response = await fetch(`${api_url}/api/vehicle/${id}`, requestOptions);
+    return response;
+  };
+
+
+  // A function to update a vehicle info
+  const updateVehicle = async (vehicleId, formData, loggedInEmployeeToken) => {
+    const response = await fetch(`${api_url}/api/vehicle/${vehicleId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": loggedInEmployeeToken, // Ensure token is included
+      },
+      body: JSON.stringify(formData), // Convert data to JSON
+    });
+    
+    // Check if response is JSON
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      return response.json();
+    } else {
+      const errorText = await response.text();
+      throw new Error(`Unexpected response format: ${errorText}`);
+    }
+  };
+  
+const vehicleService = {getSingleVehicle,addVehicle,getVehicleById,updateVehicle};
 export default vehicleService;
