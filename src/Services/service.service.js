@@ -29,6 +29,7 @@ const getAllServices = async (loggedInEmployeeToken) => {
   return response.json();
 };
 
+
 const updateService = async (serviceId, formData, loggedInEmployeeToken) => {
   const response = await fetch(`${api_url}/api/service/${serviceId}`, {
     method: "PUT",

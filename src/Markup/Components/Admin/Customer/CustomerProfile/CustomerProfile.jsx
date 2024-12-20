@@ -373,10 +373,18 @@ function CustomerProfile() {
                           {vehicle?.vehicle_serial}
                         </p>
                         <p className={styles.customerText}>
-                          <button style={{ backgroundColor: "white" }}>
-                            <span> Edit vehicle info</span>{" "}
+                        <button style={{ backgroundColor: "white" }}>
+                      {/* <Link to="/edit-vehicle" style={{ textDecoration: "none", color: "inherit" }}>
+                        <span>Edit vehicle info</span>{" "}
+                        <FaEdit color="#E90D09" />
+                      </Link> */}
+
+                        <span>
+                          <Link to={`/admin/edit-vehicle/${customer1.customer_hash}/${vehicle_id}`}  style={{ textDecoration: "none", color: "inherit" }}>
                             <FaEdit color="#E90D09" />
-                          </button>
+                          </Link>
+                        </span>
+                    </button>
                         </p>
                       </div>
                     )))
