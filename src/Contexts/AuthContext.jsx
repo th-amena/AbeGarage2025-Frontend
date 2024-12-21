@@ -14,14 +14,28 @@ export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [employee, setEmployee] = useState(null);
 
-  const value = { isLogged, isAdmin, setIsAdmin, setIsLogged, employee };
+  // Track whether orders have been updated
+  const [ordersUpdated, setOrdersUpdated] = useState(false);
+
+  // Function to toggle the `ordersUpdated` state
+  const toggleOrdersUpdated = () => {
+    setOrdersUpdated((prev) => !prev);
+  };
+
+  const value = {
+    isLogged,
+    isAdmin,
+    setIsAdmin,
+    setIsLogged,
+    employee,
+    ordersUpdated, // Provide `ordersUpdated` in the context
+    toggleOrdersUpdated, // Provide function to toggle, `ordersUpdated` in the context
+  };
 
   useEffect(() => {
-    // Retrieve the logged in user from local storage
+    // Retrieve the logged-in user from local storage
     const loggedInEmployee = getAuth();
-    // console.log(loggedInEmployee);
     loggedInEmployee.then((response) => {
-      // console.log(response);
       if (response.employee_token) {
         setIsLogged(true);
         // 3 is the employee_role for admin
@@ -32,5 +46,6 @@ export const AuthProvider = ({ children }) => {
       }
     });
   }, []);
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

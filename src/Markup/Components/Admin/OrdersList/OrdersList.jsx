@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import styles from "./OrdersList.module.css";
 import orderService from "../../../../Services/order.service";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { useAuth } from "../../../../Contexts/AuthContext";
 import { FaEdit } from "react-icons/fa";
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { ordersUpdated, toggleOrdersUpdated } = useAuth(); // Consume toggleOrdersUpdated and ordersUpdated
 
+  // Fetch the orders data when the component mounts or ordersUpdated changes
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const ordersData = await orderService.getOrders();
         const data = await ordersData.data;
-        // console.log(data);
         setOrders(data);
       } catch (error) {
         setError(error.message || "Failed to fetch orders.");
@@ -24,9 +26,33 @@ const OrdersPage = () => {
     };
 
     fetchOrders();
-  }, []);
+  }, [ordersUpdated]); // Trigger re-fetch when ordersUpdated changes
 
-  console.log(orders);
+  // Logic to handle order status change based on service status
+  const handleOrderStatusChange = async (order) => {
+    try {
+      // Check if all services are completed for the order
+      const allServicesCompleted = order.order_services.every(
+        (service) => service.service_completed
+      );
+
+      // Determine the new status of the order
+      const newOrderStatus = allServicesCompleted ? 1 : 0; // 1: Completed, 0: In Progress
+
+      // If the order status has changed, update the backend
+      if (newOrderStatus !== order.order_status) {
+        // Update the order status via the orderService API
+        await orderService.updateOrderStatus(order.order_id, newOrderStatus);
+
+        // Re-fetch orders after updating the status
+        toggleOrdersUpdated(); // Trigger the update in context to re-fetch orders
+      }
+    } catch (error) {
+      console.error("Error updating order status:", error);
+    }
+  };
+
+  // Display loading, error, or orders based on the state
   return (
     <div className={`container-fluid ${styles.ordersPage}`}>
       <h1 className={styles.pageTitle}>
@@ -107,6 +133,7 @@ const OrdersPage = () => {
                       <a
                         href={`/order-update/${order.order_hash}`}
                         className={styles.viewEditLink}
+                        onClick={() => handleOrderStatusChange(order)} // Trigger the order status change
                       >
                         <FaEdit color="#081336" />
                       </a>
@@ -123,3 +150,5 @@ const OrdersPage = () => {
 };
 
 export default OrdersPage;
+
+

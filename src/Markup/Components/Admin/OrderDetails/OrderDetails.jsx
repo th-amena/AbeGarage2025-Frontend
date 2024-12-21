@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // For accessing route parameters
 import orderService from "../../../../Services/order.service"; // Import the service for fetching order data
+import { useAuth } from "../../../../Contexts/AuthContext"; // Access the auth context
 import styles from "./OrderDetails.module.css";
 
 const OrderDetails = () => {
@@ -8,6 +9,7 @@ const OrderDetails = () => {
    const [orderDetails, setOrderDetails] = useState(null);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
+   const { ordersUpdated, toggleOrdersUpdated } = useAuth(); // Access context values
 
    useEffect(() => {
       const fetchOrderDetails = async () => {
@@ -16,7 +18,14 @@ const OrderDetails = () => {
                .getOrderById(order_hash)
                .then((res) => res.json())
                .then((data) => {
-                  setOrderDetails(data.singleOrder[0]);
+                  const order = data.singleOrder[0];
+                  
+                  // Check if any service is still in progress
+                  const isInProgress = order.order_services.some(service => !service.service_completed);
+
+                  // Update overall order status based on service statuses
+                  order.order_status = isInProgress ? 0 : 1; // 0: In Progress, 1: Completed
+                  setOrderDetails(order);
                })
                .catch(() => {
                   setError("Failed to fetch order details.");
@@ -28,7 +37,13 @@ const OrderDetails = () => {
          }
       };
       fetchOrderDetails();
-   }, [order_hash]);
+   }, [order_hash, ordersUpdated]); // Re-fetch data when ordersUpdated changes
+
+   const handleStatusUpdate = async () => {
+      // Example: If you're updating the order status or services:
+      await orderService.updateOrderStatus(orderDetails.order_hash, updatedServices);
+      toggleOrdersUpdated(); // Notify that the orders have been updated
+   };
 
    if (loading) {
       return <div>Loading...</div>;
@@ -59,29 +74,24 @@ const OrderDetails = () => {
                   {/* Status Badge */}
                   <span
                      className={`${styles.statusBadge} ${
-                        orderDetails.order_status
+                        orderDetails.order_status === 1
                            ? styles.completed
                            : styles.inProgress
                      }`}
                   >
-                     {orderDetails.order_status ? "Completed" : "In Progress"}
+                     {orderDetails.order_status === 1 ? "Completed" : "In Progress"}
                   </span>
                </div>
                {/* Paragraph Description */}
                <p className={styles.description}>
-                  You can track the progress of your order using this page. We
-                  will constantly update this page to let you know how we are
-                  progressing. As soon as we are done with the order, the status
-                  will turn green. That means your car is ready for pickup.
+                  You can track the progress of your order using this page. We will constantly update this page to let you know how we are progressing. As soon as we are done with the order, the status will turn green. That means your car is ready for pickup.
                </p>
             </header>
 
             {/* Main Content */}
             <div className={styles.row}>
                {/* Customer Card */}
-               <div
-                  className={`${styles.detailsCard} ${styles.customerDetails}`}
-               >
+               <div className={`${styles.detailsCard} ${styles.customerDetails}`}>
                   <h2 className={styles.cardHeading}>CUSTOMER</h2>
                   <p className={styles.customerName}>
                      {`${orderDetails.customer_first_name} ${orderDetails.customer_last_name}`}
@@ -90,21 +100,17 @@ const OrderDetails = () => {
                      <strong>Email:</strong> {orderDetails.customer_email}
                   </p>
                   <p className={styles.detailItem}>
-                     <strong>Phone Number:</strong>{" "}
-                     {orderDetails.customer_phone_number}
+                     <strong>Phone Number:</strong> {orderDetails.customer_phone_number}
                   </p>
                   <p className={styles.detailItem}>
-                     <strong>Active Customer:</strong>{" "}
-                     {orderDetails.active_customer_status ? "Yes" : "No"}
+                     <strong>Active Customer:</strong> {orderDetails.active_customer_status ? "Yes" : "No"}
                   </p>
                   {/* Red line at the bottom */}
                   <div className={styles.redLine}></div>
                </div>
 
                {/* Vehicle Card */}
-               <div
-                  className={`${styles.detailsCard} ${styles.vehicleDetails}`}
-               >
+               <div className={`${styles.detailsCard} ${styles.vehicleDetails}`}>
                   <h2 className={styles.cardHeading}>CAR IN SERVICE</h2>
                   <p className={styles.vehicleTitle}>
                      {`${orderDetails.vehicle_make} ${orderDetails.vehicle_model} (${orderDetails.vehicle_color})`}
@@ -116,8 +122,7 @@ const OrderDetails = () => {
                      <strong>Vehicle Year:</strong> {orderDetails.vehicle_year}
                   </p>
                   <p className={styles.detailItem}>
-                     <strong>Vehicle Mileage:</strong>{" "}
-                     {orderDetails.vehicle_mileage}
+                     <strong>Vehicle Mileage:</strong> {orderDetails.vehicle_mileage}
                   </p>
                   {/* Red line at the bottom */}
                   <div className={styles.redLine}></div>
@@ -133,28 +138,20 @@ const OrderDetails = () => {
                <h2>Requested Services</h2>
 
                {/* Services List */}
-               {orderDetails.order_services &&
-               orderDetails.order_services.length > 0 ? (
+               {orderDetails.order_services && orderDetails.order_services.length > 0 ? (
                   <ul>
                      {orderDetails.order_services.map((service) => (
-                        <li
-                           key={service.order_service_id}
-                           className={styles.serviceItem}
-                        >
+                        <li key={service.order_service_id} className={styles.serviceItem}>
                            <div className={styles.serviceHeader}>
                               <p className={styles.serviceTitle}>
                                  {service.service_name}
                               </p>
                               <span
                                  className={`${styles.serviceStatusBadge} ${
-                                    service.service_completed
-                                       ? styles.completed
-                                       : styles.inProgress
+                                    service.service_completed ? styles.completed : styles.inProgress
                                  }`}
                               >
-                                 {service.service_completed
-                                    ? "Completed"
-                                    : "In Progress"}
+                                 {service.service_completed ? "Completed" : "In Progress"}
                               </span>
                            </div>
                            <p className={styles.serviceDescription}>
@@ -167,8 +164,9 @@ const OrderDetails = () => {
                   <p>No services associated with this order.</p>
                )}
             </div>
-                 </div>
+         </div>
       </div>
    );
 };
+
 export default OrderDetails;
