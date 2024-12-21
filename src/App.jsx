@@ -27,6 +27,8 @@ import OrderDetailsPage from "./Markup/Pages/Admin/OrderDetailsPage/OrderDetails
 import CustomerProfile from "./Markup/Pages/Admin/Customer/CustomerProfile/CustomerProfile";
 import CustomerList from "./Markup/Pages/Admin/Customer/CustomerList/CustomerList";
 import SelectVehicle from "./Markup/pages/Admin/SelectVehicle/SelectVehicle";
+import CreateOrder from "./Markup/pages/Admin/CreateOrder/CreateOrder";
+import VehicleUpdate from "./Markup/Pages/Admin/VehicleUpdate/VehicleUpdate";
 import OrderStatusPage from "./Markup/Pages/Admin/OrderStatusPage/OrderStatusPage";
 
 function App() {
@@ -98,14 +100,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/admin/order/:order_hash/"
-          element={
-            <PrivateAuthRoute roles={[1, 2, 3]}>
-              <OrderStatusPage />
-            </PrivateAuthRoute>
-          }
-        />
+        <Route path="/Contact" element={<Contact />} />
 
         <Route
           path="/admin/services"
@@ -115,9 +110,6 @@ function App() {
             </PrivateAuthRoute>
           }
         />
-
-        <Route path="/Contact" element={<Contact />} />
-        
 
         <Route
           path="/admin/orders"
@@ -135,17 +127,22 @@ function App() {
             </PrivateAuthRoute>
           }
         />
-      
-      <Route
-  path="/order-update/:order_hash"
-  element={
-    <PrivateAuthRoute roles={[3, 2, 1]}>
-      <OrderStatusPage />
-    </PrivateAuthRoute>
-  }
-/>
-
-
+        <Route
+          path="/admin/order/add-new-order/select-service/:customer_hash/:vehicle_id"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <CreateOrder />
+            </PrivateAuthRoute>
+          }
+        />
+       <Route
+          path="/admin/order/:order_hash/"
+          element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+              <OrderStatusPage />
+            </PrivateAuthRoute>
+          }
+        />
         <Route path="/Contact" element={<Contact />} />
         <Route
           path="/admin/select-vehicle/:customer_hash"
@@ -174,12 +171,25 @@ function App() {
         />
         {/* Services page routes start Here */}
         <Route path="/services" element={<Servicespage />} />
+
         <Route
           path={`/admin/services/service-update/:id`}
           element={<EditServices />}
         />
         {/* Services page routes end Here */}
+
+          {/* to update vehicle info */}
+        <Route
+          path="/admin/edit-vehicle/:customer_hash/:id"
+          element={
+            <PrivateAuthRoute roles={[2, 3]}>
+              <VehicleUpdate />
+            </PrivateAuthRoute>
+          }
+        />
       </Routes>
+
+
     </>
   );
 }

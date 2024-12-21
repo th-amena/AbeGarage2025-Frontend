@@ -13,6 +13,7 @@ const EditService = () => {
   const [serviceDescription, setServiceDescription] = useState("");
 
   useEffect(() => {
+
     const fetchService = async () => {
       try {
         const response = await SERVICE.singleService(
