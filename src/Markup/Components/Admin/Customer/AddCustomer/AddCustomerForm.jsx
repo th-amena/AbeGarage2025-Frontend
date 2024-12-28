@@ -1,6 +1,6 @@
 // export default AddCustomerForm;
 import React, { useState } from "react";
-// import { BeatLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import customerService from "../../../../../Services/customer.service";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../../Contexts/AuthContext";
@@ -55,18 +55,56 @@ function AddCustomerForm() {
     return true;
   };
 
+  // const handleAddCustomer = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!validateForm()) {
+  //     return;
+  //   }
+
+  //   setLoading(true);
+
+  //   try {
+  //     const { email, firstName, lastName, phoneNumber, activeStatus } =
+  //       formData;
+  //     const customerData = {
+  //       customer_email: email,
+  //       customer_first_name: firstName,
+  //       customer_last_name: lastName,
+  //       customer_phone_number: phoneNumber,
+  //       active_customer_status: activeStatus ? 1 : 0,
+  //     };
+
+  //     const response = customerService
+  //       .createCustomer(customerData, loggedInEmployeeToken)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(data);
+  //         navigate("/admin/customers");
+  //       });
+  //     setSuccessMessage("Customer added successfully! Redirecting...");
+  //   } catch (error) {
+  //     console.log(error);
+  //     setErrorMessage(error?.response?.data?.msg || "An error occurred.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleAddCustomer = async (e) => {
     e.preventDefault();
-
+  
     if (!validateForm()) {
       return;
     }
-
+  
     setLoading(true);
-
+    setErrorMessage("");
+    setSuccessMessage("");
+  
     try {
-      const { email, firstName, lastName, phoneNumber, activeStatus } =
-        formData;
+      const { email, firstName, lastName, phoneNumber, activeStatus } = formData;
+  
       const customerData = {
         customer_email: email,
         customer_first_name: firstName,
@@ -74,22 +112,28 @@ function AddCustomerForm() {
         customer_phone_number: phoneNumber,
         active_customer_status: activeStatus ? 1 : 0,
       };
-
-      const response = customerService
-        .createCustomer(customerData, loggedInEmployeeToken)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          navigate("/admin/customers");
-        });
-      setSuccessMessage("Customer added successfully! Redirecting...");
+  
+      // Call API
+      const response = await customerService.createCustomer(
+        customerData,
+        loggedInEmployeeToken
+      );
+      const data = await response.json();
+  
+      if (response.ok) {
+        setSuccessMessage("Customer added successfully! Redirecting...");
+        setTimeout(() => navigate("/admin/customers"), 2000); // Redirect after 2 seconds
+      } else {
+        // Handle specific error messages from API
+        setErrorMessage(data?.msg || "An error occurred while adding the customer.");
+      }
     } catch (error) {
-      console.log(error);
-      setErrorMessage(error?.response?.data?.msg || "An error occurred.");
+      // Catch network or unexpected errors
+      setErrorMessage(error.message || "An unexpected error occurred.");
     } finally {
       setLoading(false);
-    }
-  };
+}
+};
 
   return (
     <section className="contact-section">
