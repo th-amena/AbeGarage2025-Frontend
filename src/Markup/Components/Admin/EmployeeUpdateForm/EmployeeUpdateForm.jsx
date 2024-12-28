@@ -93,6 +93,7 @@ function EmployeeUpdateForm() {
             setLastName(data?.employee_last_name);
             setPhoneNumber(data?.employee_phone);
             setCompanyRole(data?.company_role_id);
+            setActiveEmployee(data?.active_employee);
           });
       } catch (error) {
         console.log(error);
