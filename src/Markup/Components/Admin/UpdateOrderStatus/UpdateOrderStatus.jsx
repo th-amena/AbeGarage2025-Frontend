@@ -63,13 +63,19 @@ const UpdateOrderStatus = () => {
       )
         ? 1 // Set order status to 1 (Completed) if all services are completed
         : 0; // Otherwise, set order status to 0 (In Progress)
-
-      await orderService.updateOrderStatus(
-        order_hash,
-        updatedServices,
-        order_status, // Send the updated order status to the backend
-        localStorage.getItem("token")
-      );
+      const data = {
+        order_id: orderDetails.order_id,
+        service_completed: updatedServices,
+      };
+      await orderService
+        .updateOrderStatus(data)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
       alert("Order status updated successfully!");
 
@@ -98,7 +104,9 @@ const UpdateOrderStatus = () => {
             </div>
             <span
               className={`${styles.statusBadge} ${
-                statusBadge === "Completed" ? styles.completed : styles.inProgress
+                statusBadge === "Completed"
+                  ? styles.completed
+                  : styles.inProgress
               }`}
             >
               {statusBadge}
@@ -118,7 +126,8 @@ const UpdateOrderStatus = () => {
               <strong>Email:</strong> {orderDetails.customer_email}
             </p>
             <p className={styles.detailItem}>
-              <strong>Phone Number:</strong> {orderDetails.customer_phone_number}
+              <strong>Phone Number:</strong>{" "}
+              {orderDetails.customer_phone_number}
             </p>
           </div>
 
@@ -143,17 +152,24 @@ const UpdateOrderStatus = () => {
           {orderDetails.order_services.length > 0 ? (
             <ul>
               {orderDetails.order_services.map((service) => (
-                <li key={service.order_service_id} className={styles.serviceItem}>
+                <li
+                  key={service.order_service_id}
+                  className={styles.serviceItem}
+                >
                   <div className={styles.serviceHeader}>
-                    <p className={styles.serviceTitle}>{service.service_name}</p>
+                    <p className={styles.serviceTitle}>
+                      {service.service_name}
+                    </p>
                     <label className={styles.checkboxWrapper}>
                       <input
                         type="checkbox"
-                        checked={!!updatedServices.find(
-                          (s) =>
-                            s.order_service_id === service.order_service_id &&
-                            s.completed_value === 1
-                        )}
+                        checked={
+                          !!updatedServices.find(
+                            (s) =>
+                              s.order_service_id === service.order_service_id &&
+                              s.completed_value === 1
+                          )
+                        }
                         onChange={(e) =>
                           handleCheckboxChange(
                             service.order_service_id,
