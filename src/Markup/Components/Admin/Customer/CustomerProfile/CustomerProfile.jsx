@@ -162,7 +162,7 @@ function CustomerProfile() {
         .getSingleVehicle(customer_hash, loggedInEmployeeToken)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data?.SingleVehicle);
+          // console.log(data?.SingleVehicle);
           setSpinner(!spin);
           setVehicle1(data?.SingleVehicle);
           setVehicleError("");
@@ -194,19 +194,19 @@ function CustomerProfile() {
         .getSingleCustomerOrders(customer_hash, loggedInEmployeeToken)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setSpinner2(!spin2);
           setOrder1(data?.customerOrder);
           setOrderError("");
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           setSpinner2(!spin2);
           setOrder1([]);
           setOrderError(error?.response?.data?.error);
         });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setSpinner2(!spin2);
       setOrder1([]);
       setOrderError(error?.response?.data?.error);
@@ -237,14 +237,14 @@ function CustomerProfile() {
       vehicle_color,
       customer_hash,
     };
-    console.log(FormData);
+    // console.log(FormData);
     try {
       const data = await vehicleService.addVehicle(
         FormData,
         loggedInEmployeeToken
       );
 
-      console.log(data);
+      // console.log(data);
 
       fetchData2();
       setShowHide(!showHide);

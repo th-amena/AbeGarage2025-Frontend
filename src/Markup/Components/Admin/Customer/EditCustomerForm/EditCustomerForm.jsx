@@ -48,7 +48,7 @@ function EditCustomerForm() {
       .updateSingleCustomer(formData, loggedInEmployeeToken)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         if (data.error || data.errors) {
           setServerError(data.error || data.errors);
         } else {
@@ -76,7 +76,7 @@ function EditCustomerForm() {
           ?.getCustomerById(customer_hash, loggedInEmployeeToken)
           .then((res) => res.json())
           .then((data) => {
-          console.log(data)
+          // console.log(data)
             setEmail(data?.customer_email);
             setFirstName(data?.customer_first_name);
             setLastName(data?.customer_last_name);
@@ -84,7 +84,7 @@ function EditCustomerForm() {
             setActiveCustomer(data?.active_customer_status);
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchCustomerData();
@@ -152,7 +152,7 @@ function EditCustomerForm() {
                             setActiveCustomer(event.target.checked)
                           }
                         />
-                        Is active customer
+                        <span className="px-2">Is active customer</span>
                       </label>
                     </div>
 

@@ -34,7 +34,7 @@ function CustomerProfile() {
       .then((data) => setCustomer(data))
       .catch((error) => console.error(error));
   }, []);
-  console.log(customer);
+  // console.log(customer);
   useEffect(() => {
     const fetchVehicles = vehicleService
       .getSingleVehicle(customer_hash, token)
@@ -42,7 +42,7 @@ function CustomerProfile() {
       .then((data) => setVehicles(data.SingleVehicle))
       .catch((error) => console.error(error));
   }, []);
-  console.log(vehicles);
+  // console.log(vehicles);
   return (
     <div className={styles.serviceForm}>
       {/* Customer Info Section */}

@@ -43,7 +43,7 @@ function Login() {
      employee_email,
      employee_password,
    };
-   console.log("Sending form data:", formData);
+  //  console.log("Sending form data:", formData);
 
    try {
      // Awaiting the response from the login service
@@ -56,7 +56,7 @@ function Login() {
 
      // Parse the JSON response
      const result = await response.json();
-     console.log("Parsed response:", result);
+    //  console.log("Parsed response:", result);
 
      if (result.status === "success") {
        if (result.data && result.data.employee_token) {
@@ -67,7 +67,7 @@ function Login() {
          location.pathname === "/login" ? "/" : location.pathname
        );
      } else {
-       console.log("Error from backend:", result.message);
+      //  console.log("Error from backend:", result.message);
        setServerError(result.message || "Unknown error occurred.");
      }
    } catch (error) {

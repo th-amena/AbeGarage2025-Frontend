@@ -22,9 +22,9 @@ const EditService = () => {
         );
         setServiceName(response.service.service_name || "");
         setServiceDescription(response.service.service_description || "");
-        console.log(response.service);
+        // console.log(response.service);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchService();
@@ -37,17 +37,17 @@ const EditService = () => {
       service_name: serviceName,
       service_description: serviceDescription,
     };
-    console.log(formData);
+    // console.log(formData);
     try {
       const response = await SERVICE.updateService(
         servicesId,
         formData,
         loggedInEmployeeToken
       );
-      console.log("service updated successfully:", response);
+      // console.log("service updated successfully:", response);
       navigate("/admin/services");
     } catch (error) {
-      console.error("Error updating service:", error.message);
+      // console.error("Error updating service:", error.message);
       alert(`Error updating service: ${error.message}`);
     }
   };

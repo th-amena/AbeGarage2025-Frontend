@@ -9,11 +9,11 @@ const logIn = async (formData) => {
     body: JSON.stringify(formData),
   };
   
-  console.log("About to send request:", requestOptions);
+  // console.log("About to send request:", requestOptions);
 
   try {
     const response = await fetch(`${api_url}/api/employee/login`, requestOptions);
-    console.log("Raw response:", response);  // Log the raw response object
+    // console.log("Raw response:", response);  // Log the raw response object
 
     // Check if the response is okay
     if (!response.ok) {

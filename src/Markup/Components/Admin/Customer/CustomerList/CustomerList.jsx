@@ -15,11 +15,11 @@ function CustomerList() {
       .getAllCustomers()
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setCustomers(data);
       })
       .catch((error) => console.error(error));
-  }, [customers]);
+  }, []);
 
   const handleSearch = (e) => {
     const query = e.target.value;
@@ -43,7 +43,7 @@ function CustomerList() {
       setFilteredCustomers([]);
     }
   };
-  console.log(customers);
+  // console.log(customers);
   return (
     <>
       <section className="contact-section">
