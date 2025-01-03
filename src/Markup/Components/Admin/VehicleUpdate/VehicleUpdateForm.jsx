@@ -25,7 +25,7 @@ const VehicleUpdateForm = () => {
         const response = await VEHICLE.getVehicleById(vehicleId, loggedInEmployeeToken)
         .then((res) => res.json())
         .then((response)=> {
-          console.log(response);
+          // console.log(response);
           setVehicleYear(response?.singleVehicle[0]?.vehicle_year || "");
           setVehicleMake(response?.singleVehicle[0].vehicle_make || "");
           setVehicleModel(response?.singleVehicle[0].vehicle_model || "");
@@ -45,7 +45,7 @@ const VehicleUpdateForm = () => {
     fetchVehicle();
   }, []);
 
-    console.log(vehicleYear)
+    // console.log(vehicleYear)
   const handleUpdateVehicle = async (e) => {
     e.preventDefault();
 
@@ -61,11 +61,11 @@ const VehicleUpdateForm = () => {
 
     };
 
-    console.log(formData);
+    // console.log(formData);
 
     try {
       const response = await VEHICLE.updateVehicle(vehicleId, formData, loggedInEmployeeToken);
-      console.log("Vehicle updated successfully:", response);
+      // console.log("Vehicle updated successfully:", response);
       navigate(`/admin/customer-profile/${customer_hash}`);
     } catch (error) {
       console.error("Error updating vehicle:", error.message);

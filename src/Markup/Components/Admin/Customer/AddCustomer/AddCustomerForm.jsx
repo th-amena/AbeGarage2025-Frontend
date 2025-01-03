@@ -34,7 +34,7 @@ function AddCustomerForm() {
   };
 
   const validateForm = () => {
-    const { email, firstName, phoneNumber } = formData;
+    const { email, firstName, lastName, phoneNumber } = formData;
 
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setErrorMessage("Please enter a valid email address.");
@@ -43,6 +43,10 @@ function AddCustomerForm() {
 
     if (!firstName) {
       setErrorMessage("First name is required.");
+      return false;
+    }
+    if (!lastName) {
+      setErrorMessage("Last name is required.");
       return false;
     }
 
@@ -93,18 +97,19 @@ function AddCustomerForm() {
 
   const handleAddCustomer = async (e) => {
     e.preventDefault();
-  
+
     if (!validateForm()) {
       return;
     }
-  
+
     setLoading(true);
     setErrorMessage("");
     setSuccessMessage("");
-  
+
     try {
-      const { email, firstName, lastName, phoneNumber, activeStatus } = formData;
-  
+      const { email, firstName, lastName, phoneNumber, activeStatus } =
+        formData;
+
       const customerData = {
         customer_email: email,
         customer_first_name: firstName,
@@ -112,28 +117,30 @@ function AddCustomerForm() {
         customer_phone_number: phoneNumber,
         active_customer_status: activeStatus ? 1 : 0,
       };
-  
+
       // Call API
       const response = await customerService.createCustomer(
         customerData,
         loggedInEmployeeToken
       );
       const data = await response.json();
-  
+
       if (response.ok) {
         setSuccessMessage("Customer added successfully! Redirecting...");
         setTimeout(() => navigate("/admin/customers"), 2000); // Redirect after 2 seconds
       } else {
         // Handle specific error messages from API
-        setErrorMessage(data?.msg || "An error occurred while adding the customer.");
+        setErrorMessage(
+          data?.message || "An error occurred while adding the customer."
+        );
       }
     } catch (error) {
       // Catch network or unexpected errors
       setErrorMessage(error.message || "An unexpected error occurred.");
     } finally {
       setLoading(false);
-}
-};
+    }
+  };
 
   return (
     <section className="contact-section">

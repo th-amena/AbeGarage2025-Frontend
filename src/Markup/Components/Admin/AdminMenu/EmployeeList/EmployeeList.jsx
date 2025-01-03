@@ -37,11 +37,11 @@ const EmployeesList = () => {
                 return res.json();
               })
               .then((data) => {
-                console.log(data.message);
+                // console.log(data.message);
                 alert(data.message);
               })
             .catch((error) => {
-              console.log(error)
+              // console.log(error)
             })
 
         },
@@ -57,7 +57,7 @@ const EmployeesList = () => {
     allEmployees
       .then((res) => {
         if (!res.status == 200) {
-          console.log(res.status);
+          // console.log(res.status);
           setApiError(true);
           if (res.status === 401) {
             setApiErrorMessage("Please login again");
@@ -70,13 +70,13 @@ const EmployeesList = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data?.data?.length !== 0) {
           setEmployees(data?.data);
         }
       })
       .catch((err) => {
-        console.log(err.message);
+        // console.log(err.message);
       });
   }, [employees]);
 

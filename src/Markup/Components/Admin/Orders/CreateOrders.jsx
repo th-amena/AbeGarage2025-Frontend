@@ -22,7 +22,7 @@ const CreateOrders = () => {
     results
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setCustomers(data); // Update state with customer data
       });
   }, []);

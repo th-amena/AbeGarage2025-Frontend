@@ -24,7 +24,7 @@ const ServiceList = () => {
         const response = await SERVICE.getAllServices(loggedInEmployeeToken);
         setAllServices(response.services);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchServices();
@@ -50,7 +50,7 @@ const ServiceList = () => {
       const response = await SERVICE.getAllServices(loggedInEmployeeToken);
       setAllServices(response.services);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       alert(`Error adding service: ${error.message}`);
     }
   };
@@ -66,7 +66,7 @@ const ServiceList = () => {
       const response = await SERVICE.getAllServices(loggedInEmployeeToken);
       setAllServices(response.services);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       alert(`Error deleting service: ${error.message}`);
     }
   };

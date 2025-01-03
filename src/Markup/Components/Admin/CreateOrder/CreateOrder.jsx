@@ -59,7 +59,7 @@ function CreateNewOrder() {
       .createNewOrder(newOrder, token)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         navigator("/admin/orders");
       });
   };

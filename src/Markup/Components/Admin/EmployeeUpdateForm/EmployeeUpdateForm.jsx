@@ -20,7 +20,7 @@ function EmployeeUpdateForm() {
   const [passwordError, setPasswordError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const { uuid } = useParams();
 
   // Create a variable to hold the user's token
@@ -30,7 +30,7 @@ function EmployeeUpdateForm() {
   if (employee && employee.employee_token) {
     loggedInEmployeeToken = employee.employee_token;
   }
-  console.log(loggedInEmployeeToken);
+  // console.log(loggedInEmployeeToken);
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,14 +47,12 @@ function EmployeeUpdateForm() {
       company_role_id,
     };
 
-    
-
     // Call the service to update a new employee
     employeeService
       .updateSingleEmployee(formData, loggedInEmployeeToken)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         // If error is returned from the API server, set the error message
         if (data.error || data.errors) {
           setServerError(data.error || data.errors);
@@ -62,11 +60,11 @@ function EmployeeUpdateForm() {
           // Handle successful response
           setSuccess(true);
           setServerError("");
-          navigate('/admin/employees')
+          navigate("/admin/employees");
         }
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error);
         const resMessage =
           (error.response &&
             error.response.data &&
@@ -87,8 +85,8 @@ function EmployeeUpdateForm() {
             return res.json();
           })
           .then((data) => {
-            console.log(data);
-            setEmail(data?.employee_email)
+            // console.log(data);
+            setEmail(data?.employee_email);
             setFirstName(data?.employee_first_name);
             setLastName(data?.employee_last_name);
             setPhoneNumber(data?.employee_phone);
@@ -96,7 +94,7 @@ function EmployeeUpdateForm() {
             setActiveEmployee(data?.active_employee);
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchEmployeeData();
@@ -176,9 +174,7 @@ function EmployeeUpdateForm() {
                       <select
                         name="employee_role"
                         value={company_role_id}
-                        onChange={(event) =>
-                          setCompanyRole(event.target.value)
-                        }
+                        onChange={(event) => setCompanyRole(event.target.value)}
                         className="custom-select-box"
                       >
                         <option value="1">Employee</option>
@@ -211,7 +207,7 @@ function EmployeeUpdateForm() {
                             setActiveEmployee(event.target.checked)
                           }
                         />
-                        Is active employee
+                        <span className="px-2">Is active employee</span>
                       </label>
                     </div>
 

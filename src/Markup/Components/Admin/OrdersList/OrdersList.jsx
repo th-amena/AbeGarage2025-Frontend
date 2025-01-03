@@ -4,7 +4,7 @@ import orderService from "../../../../Services/order.service";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { useAuth } from "../../../../Contexts/AuthContext";
 import { FaEdit } from "react-icons/fa";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -122,12 +122,12 @@ const OrdersPage = () => {
                   </td>
                   <td>
                     <span style={{ marginRight: "20px" }}>
-                      <a
-                        href={`/admin/orders/${order.order_hash}`}
+                      <Link
+                        to={`/admin/orders/${order.order_hash}`}
                         className={styles.viewEditLink}
                       >
                         <FaArrowUpRightFromSquare color="#081336" />
-                      </a>
+                      </Link>
                     </span>
                     <span>
                       <Link
@@ -150,5 +150,3 @@ const OrdersPage = () => {
 };
 
 export default OrdersPage;
-
-

@@ -14,7 +14,7 @@ const createNewOrder = (newOrder, token) => {
     },
     body: JSON.stringify(newOrder),
   };
-  console.log(requestOptions);
+  // console.log(requestOptions);
   const response = fetch(`${api_url}/api/order`, requestOptions);
   return response;
 };
@@ -95,11 +95,11 @@ const updateOrderStatus = async (order_hash, updatedServices, order_status, toke
       `${api_url}/api/order`,
       requestOptions
     );
-    console.log(response);
+    // console.log(response);
     
     return response; // Return the successful response data
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     
     // throw new Error(error.message || "Failed to update order status.");
   }

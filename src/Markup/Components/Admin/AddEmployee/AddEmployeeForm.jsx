@@ -22,17 +22,20 @@ function AddEmployeeForm(props) {
   const navigate = useNavigate();
 
   // Create a variable to hold the user's token
-    let loggedInEmployeeToken = "";
-    // Destructure the auth hook and get the token
-    const { employee } = useAuth();
-    if (employee && employee.employee_token) {
-      loggedInEmployeeToken = employee.employee_token;
-    }
+  let loggedInEmployeeToken = "";
+  // Destructure the auth hook and get the token
+  const { employee } = useAuth();
+  if (employee && employee.employee_token) {
+    loggedInEmployeeToken = employee.employee_token;
+  }
 
   const handleSubmit = (e) => {
     // Prevent the default behavior of the form
     e.preventDefault();
     // Handle client side validations
+    //Clear previous data
+    setServerError("");
+    setSuccess("")
     let valid = true; // Flag
     // First name is required
     if (!employee_first_name) {
@@ -78,16 +81,17 @@ function AddEmployeeForm(props) {
     };
     // Pass the form data to the service
     const newEmployee = employeeService.createEmployee(
-      formData
-      ,loggedInEmployeeToken
+      formData,
+      loggedInEmployeeToken
     );
+   
     newEmployee
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         // If Error is returned from the API server, set the error message
-        if (data.error || data.errors) {
-          setServerError(data.error || data.errors);
+        if (data.message || data.error) {
+          setServerError(data.message || data.error);
         } else {
           // Handle successful response
           setSuccess(true);
@@ -96,14 +100,15 @@ function AddEmployeeForm(props) {
           // For now, just redirect to the home page
           setTimeout(() => {
             // window.location.href = '/admin/employees';
-           navigate("/admin/employees");
+            navigate("/admin/employees");
           }, 500);
         }
       })
       // Handle Catch
       .catch((error) => {
+        // console.log(error.message)
         const resMessage =
-          (error.response &&
+          (error.message &&
             error.response.data &&
             error.response.data.message) ||
           error.message ||
@@ -126,7 +131,10 @@ function AddEmployeeForm(props) {
                   <div className="row clearfix">
                     <div className="form-group col-md-12">
                       {serverError && (
-                        <div className="validation-error" role="alert">
+                        <div
+                          className="validation-error text-center"
+                          role="alert"
+                        >
                           {serverError}
                         </div>
                       )}
