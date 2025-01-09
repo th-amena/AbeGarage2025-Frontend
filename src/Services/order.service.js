@@ -76,18 +76,14 @@ const getOrders = async () => {
   return data; // Assuming the API returns an object with an orders array
 };
 
-const updateOrderStatus = async (order_hash, updatedServices, order_status, token) => { 
+const updateOrderStatus = async (data, token) => { 
   const requestOptions = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       "x-access-token": token,
     },
-    body: JSON.stringify({
-      order_hash,        // Order identifier (hash)
-      service_completed: updatedServices, // Array of updated service statuses
-      order_status,      // The overall order status (0 for In Progress, 1 for Completed)
-    }),
+    body: JSON.stringify(data),
   };
 
   try {
