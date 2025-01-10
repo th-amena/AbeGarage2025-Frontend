@@ -31,14 +31,14 @@ const getSingleVehicle = async (customer_hash,token) => {
 
 
   // function to get single vehicle  for a single vehicle 
-  const getVehicleById = async (id) => {
+  const getVehicleById = async (vehicle_id) => {
     const requestOptions = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(`${api_url}/api/vehicle/${id}`, requestOptions);
+    const response = await fetch(`${api_url}/api/vehicle/${vehicle_id}`, requestOptions);
     return response;
   };
 
