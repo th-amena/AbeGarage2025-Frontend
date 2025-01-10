@@ -17,6 +17,7 @@ const OrdersPage = () => {
       try {
         const ordersData = await orderService.getOrders();
         const data = await ordersData.data;
+        console.log(data)
         setOrders(data);
       } catch (error) {
         setError(error.message || "Failed to fetch orders.");

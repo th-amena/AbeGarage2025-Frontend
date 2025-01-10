@@ -77,11 +77,11 @@ function CreateNewOrder() {
   //A fujnction to get the vehicle info
   const fetchVehicle = async () => {
     const response = vehicleService
-      .getSingleVehicle(customer_hash)
+      .getVehicleById(vehicle_id)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
-        setVehicle(data.SingleVehicle[0]);
+        console.log(data);
+        setVehicle(data.singleVehicle[0]);
       });
   };
   // A fujnction to get all services
